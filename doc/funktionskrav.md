@@ -1,0 +1,89 @@
+# semester ICE-projekt
+# FUNKTIONSKRAV
+## Need to have:
+### Start nyt spil
+- Enter players (2-4?)
+- Give players letters - 7 letters
+- Display board
+  15 x 15 tiles
+  DW, TW, DL, TL
+  See Lauritz’ link for more
+- Letters:
+  Remember blank “letters” - the joker letters that can be any letter the the player want
+  See Lauritz’ link for more
+- Read a dictunary
+
+### Turn
+(Board displayed)
+
+Possibilities:
+
+- Change letters
+
+- Try out letters
+
+- Submit letters as a word
+
+- Restart game
+
+- Quit game
+
+
+
+
+#### Submit letters as a word
+
+1) Letters/word accepted 
+    - Give points
+    - Words connected directly to one or more of the player’s letters 
+        - DW, TW, DL, TL
+
+    - Receive new letters, so the player has 7 letters again
+        (unless their is not enough letters left in the bag of letters.
+        If so the player just get the rest of the letters)
+
+    -    Next turn
+
+
+2) Letters/word NOT accepted if:
+    - Not started in the middle
+    - Letters placed diagonally
+    - Not a valid word
+    - Letters connected to other letters doesn’t spell a valid word
+    - Letters not connected to one of all the letters connected from the middle
+    - “Restart” turn
+
+
+## End:
+Games end if:
+1) No more letters are left or No more words left to spell with the letters the players have
+
+2) Both players change letters two times in a row
+
+3) Winner declared - most points win
+
+
+## Game data get saved
+- Users
+- User’s points
+- User’s letters
+- The board
+- The “bag” of letters
+
+
+
+## Generelle muligheder
+- Muligt at quitte
+- Muligt at starte forfra
+
+
+
+
+## Nice to have:
+- Fortsæt gemt spil
+- Settings
+    How long time does a player have each turn?
+    Size of board?
+- Graphically drag and drop letters
+- Online version
+
