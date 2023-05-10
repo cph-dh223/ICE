@@ -1,3 +1,17 @@
 @startuml
+object Main
+object Game
+object Tiles
+object Board
+object Player
+object Letters
+
+Main *-- Game
+Game o-- Player
+Game *-- Board 
+Game *-- Letters
+Player o-- Letters
+Board *-- Tiles
+Board o-- Letters
 
 @enduml
