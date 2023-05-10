@@ -1,4 +1,4 @@
-@startuml
+@startuml classDiagram
 
 class Main{
     +{static} void main(String args)
@@ -35,8 +35,8 @@ class IO << (S,#FF7700) Singleton >>{
     - IO instance
     - Scanner scanner
 
-    + IO getInastanse()
-    + List<String> getDataFromTxt(String path)
+    + {static} IO getInastanse()
+    + {static} List<String> getDataFromTxt(String path)
 }
 
 class Tile{
@@ -47,10 +47,8 @@ class Tile{
 
     + Tile(int positionX, int positionY, Multiplyer multiplyer)
     + int getLetterScore()
-    + int getMultiplyer()
     + char getLetter()
-    + boolean getLetter()
-    + Multiplier getMultiplyer()
+    + Multiplier getMultiplier()
 }
 enum Multiplier {
     NORMAL
@@ -69,7 +67,7 @@ class Board{
 
     + Board(int width, int height, Set<String> dict)
     + void plaseLetter(int posX, int posY, Letter letter)
-    + suroundingWords()
+    - boolean checkSuroundingWords()
     + int checkWord()
     + void updateBoard()
     - Direction getWordDirection()
