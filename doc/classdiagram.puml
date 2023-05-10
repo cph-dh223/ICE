@@ -1,0 +1,125 @@
+@startuml
+
+class Main{
+    +{static} void main(String args)
+}
+
+class Game{
+    - ArrayList<Letter> letters
+    - ArrayList<Player> players
+    - Board board
+    - IUI ui
+
+    - void dataSetup()
+    - void startGame()
+    - void mainMenu()
+    - void loadSavedGame()
+    - void gameLoop()
+    - void endGame()
+    - void close()
+}
+interface IUI{
+    + void displayMessige(String msg)
+    + String getInput(String msg)
+    + void displayBoard(Board board)
+}
+note right of IUI::displayBoard
+    this could just be a diplay msg call
+end note
+
+class GraphicUI{}
+
+class TextUI{}
+
+class IO << (S,#FF7700) Singleton >>{
+    - IO instance
+    - Scanner scanner
+
+    + IO getInastanse()
+    + List<String> getDataFromTxt(String path)
+}
+
+class Tile{
+    - Letter letter
+    - int positionX 
+    - int positionY
+    - Multiplier multiplier
+
+    + Tile(int positionX, int positionY, Multiplyer multiplyer)
+    + int getLetterScore()
+    + int getMultiplyer()
+    + char getLetter()
+    + boolean getLetter()
+    + Multiplier getMultiplyer()
+}
+enum Multiplier {
+    NORMAL
+    DOUBLE_LETTER
+    TRIPLE_LETTER
+    DOUBLE_WORD
+    TRIPLE_WORD
+}
+
+class Board{
+    - Tile[][] tiles
+    - List<Tile> toBePlased
+    - Set<String> dict
+    - int width
+    - int height
+
+    + Board(int width, int height, Set<String> dict)
+    + void plaseLetter(int posX, int posY, Letter letter)
+    + suroundingWords()
+    + int checkWord()
+    + void updateBoard()
+    - Direction getWordDirection()
+}
+
+enum Direction{
+    VERTICAL
+    HORISONTAL
+}
+
+note left of Board::tiles
+    by Default 15 by 15
+end note
+note left of Board::checkWord
+    uses the toBePlased list as well as getWordDirection
+end note
+
+class Player{
+    - List<Letter> letters
+    - int score
+    - String name
+
+    + void addScore(int scoreToAdd)
+    + int getScore()
+    + void removeLetters(List<Letter> lettersToBeRemoved)
+    + void addLetters(List<Letter> lettersToBeAdded)
+    + String getName()
+
+}
+
+class Letter{
+    + char letter
+    + int letterScore
+}
+note left of Letter
+    All feilds are final
+end note
+
+Main *-- Game
+Game o-- Player
+Game *-- Board 
+Board *-- Tile
+Board *-- Direction
+Game *-- Letter
+Player o-- Letter
+Game *-- IUI
+Game *-- IO
+IUI <|-- TextUI
+IUI <|-- GraphicUI
+Tile o-- Letter
+Tile *-- Multiplier
+  
+@enduml
