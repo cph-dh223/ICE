@@ -53,15 +53,15 @@ FUNKTIONSKRAV
 
                 1) Letters/word accepted
 
-                   Give points
-                   Words connected directly to one or more of the player’s letters
-                   DW, TW, DL, TL
+                   * Give points
+                        - Words connected directly to one or more of the player’s letters
+                        - DW, TW, DL, TL
 
-                   Receive new letters, so the player has 7 letters again
-                   (unless their is not enough letters left in the bag of letters.
-                   If so the player just get the rest of the letters)
+                   * Receive new letters, so the player has 7 letters again
+                     (unless their is not enough letters left in the bag of letters.
+                     If so the player just get the rest of the letters)
 
-                   Next turn
+                   * Next turn
 
 
                 2) Letters/word NOT accepted if:
