@@ -83,7 +83,8 @@ FUNKTIONSKRAV
 
                 2) Both players change letters two times in a row
 
-                3) Winner declared - most points win
+
+            Winner declared - most points win
 
 
             Game data get saved
