@@ -28,6 +28,9 @@ FUNKTIONSKRAV
               Remember blank “letters” - the joker letters that can be any letter the the player want
               See Lauritz’ link for more
 
+            - Dictionary:
+              To check if letters connected spell valid words
+
 
 
         * Turn
