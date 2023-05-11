@@ -19,7 +19,7 @@ class Game{
     - void close()
 }
 interface IUI{
-    + void displayMessige(String msg)
+    + void displayMessage(String msg)
     + String getInput(String msg)
     + void displayBoard(Board board)
 }
