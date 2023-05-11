@@ -1,3 +1,5 @@
+package board;
+import game.Letter;
 
 public class Tile {
     private Letter letter;
