@@ -12,7 +12,11 @@ public class Board {
         throw new UnsupportedOperationException();
     }
     public void placeLetter(int posX, int posY, Letter letter){
-        
+        Tile = tiles;
+        // Find tiles in the tile list with the X and Y value.
+        // Save temp tile.
+        // Take new tile that you have saved and add the Letter that you get in the parameters.
+        // Add tobeplaced in the temp list.
     }
     public boolean checkSuroundingWords(){
         throw new UnsupportedOperationException();
