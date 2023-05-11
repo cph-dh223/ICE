@@ -24,16 +24,16 @@ public class TextUI implements IUI{
                     continue;
                 }
                 if(i == -1 || i == board.getWidth()){
-                    System.out.print('-');
+                    System.out.print(" "+i+" ");
                     continue;
                 }
                 if (j == -1 || j == board.getHeight()) {
-                    System.out.print('|');
+                    System.out.print(" "+j+" ");
                     continue;
                 }
                 char letter = board.getLetter(i, j);
                 
-                System.out.print(' ' + letter + ' ');
+                System.out.print(" " + letter + " ");
             }
             System.out.println();
         }
