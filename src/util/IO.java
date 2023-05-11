@@ -18,7 +18,6 @@ public class IO {
         return instance;
     }
 
-
     public static List<String> getDataFromTxt(String path) throws FileNotFoundException{
         List<String> data = new LinkedList<>();
 
