@@ -63,7 +63,21 @@ public class Game{
     }
     private void loadSavedGame(){throw new UnsupportedOperationException();}
     private void gameLoop(){throw new UnsupportedOperationException();}
-    private void endGame(){throw new UnsupportedOperationException();}
+    private void endGame() {
+        ui.displayMessage(  players.get(0).getName()+ ", you have " + players.get(0).getScore() + " points");
+        ui.displayMessage(  players.get(1).getName()+ ", you have " + players.get(1).getScore() + " points");
+
+        if (players.get(0).getScore() > players.get(1).getScore()) {
+            ui.displayMessage("Congratulations " + players.get(0).getName() + " you win!");
+        }
+       else if (players.get(0).getScore() < players.get(1).getScore()) {
+            ui.displayMessage("Congratulations " + players.get(1).getName() + " you win!");
+       }
+       else {
+            ui.displayMessage("It is a draw!");
+        }
+       close();
+    }
     private void close(){throw new UnsupportedOperationException();}
 
     private void removeLetters(List<Letter> takenLetters) {
