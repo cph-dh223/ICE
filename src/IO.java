@@ -1,4 +1,6 @@
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class IO {
     private static IO instanse;
@@ -14,6 +16,11 @@ public class IO {
     }
 
     public static List<String> getDataFromTxt(String path){
-        throw new UnsupportedOperationException();
+        Scanner scanner = new Scanner(path);
+        List<String> data = new LinkedList<>();
+        while (scanner.hasNext()){
+            data.add(scanner.nextLine());
+        }
+        return data;
     }
 }
