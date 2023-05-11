@@ -12,7 +12,7 @@ public class Board {
         throw new UnsupportedOperationException();
     }
     public void placeLetter(int posX, int posY, Letter letter){
-        throw new UnsupportedOperationException();
+        
     }
     public boolean checkSuroundingWords(){
         throw new UnsupportedOperationException();
