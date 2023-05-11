@@ -3,7 +3,7 @@ import java.util.Set;
 
 public class Board {
     private Tile[][] tiles;
-    private List<Tile> toBePlased;
+    private List<Tile> toBePlaced;
     private Set<String> dict;
     private int width;
     private int height;
@@ -11,7 +11,7 @@ public class Board {
     public Board(int width, int height, Set<String> dict){
         throw new UnsupportedOperationException();
     }
-    public void plaseLetter(int posX, int posY, Letter letter){
+    public void placeLetter(int posX, int posY, Letter letter){
         throw new UnsupportedOperationException();
     }
     public boolean checkSuroundingWords(){
