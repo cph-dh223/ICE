@@ -7,7 +7,7 @@ public class Tile {
     private int positionY;
     private Multiplier multiplier;
 
-    public Tile(int positionX, int positionY, Multiplier multiplyer){
+    public Tile(int positionX, int positionY, Multiplier multiplier){
         throw new UnsupportedOperationException();
     }
     public int getLetterScore(){
