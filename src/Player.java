@@ -60,6 +60,12 @@ public class Player {
         //throw new UnsupportedOperationException();
 
 
+        for (Letter letter : lettersToBeAdded) {
+
+            this.letters.add(letter);
+
+        }
+
 
     }
 
@@ -69,6 +75,9 @@ public class Player {
 
 
     public String getName(){
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+
+        return this.name;
+
     }
 }
