@@ -8,15 +8,26 @@ public class Tile {
     public Tile(int positionX, int positionY, Multiplier multiplyer){
         throw new UnsupportedOperationException();
     }
+
     public int getLetterScore(){
-        throw new UnsupportedOperationException();
-    }
-    public Multiplier getMultiplier(){
-        throw new UnsupportedOperationException();
-    }
-    public char getLetter(){
-        throw new UnsupportedOperationException();
+        return letter.getLetterScore();
     }
 
+    public Multiplier getMultiplier(){
+        return multiplier;
+    }
+
+    public char getLetter(){
+        return letter.getLetter();
+    }
+
+    public int getPositionX() {
+        return positionX;
+    }
+
+    public int getPositionY() {
+        return positionY;
+    }
+    
 
 }
