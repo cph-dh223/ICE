@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+
 import board.Board;
 import util.IO;
 import util.IUI;
@@ -22,12 +24,21 @@ public class Game{
         try {
             dict = IO.getDataFromTxt("../data/Dictionary.txt");
         } catch (FileNotFoundException e) {
-            ui.displayMessige("The dictionary file was not found please look in the data folder and make shure there is a \"Dictionary.txt\" file");
+            ui.displayMessage("The dictionary file was not found please look in the data folder and make shure there is a \"Dictionary.txt\" file");
         }
         board = new Board(defaultWidth, defaultHeight, new HashSet(dict));
     }
-  
-    private void startGame(){throw new UnsupportedOperationException();}
+    
+    private void startGame(){
+        String name1 = ui.getInput("player 1. name?");
+        ui.displayMessage("player one is "+ name1);
+        String name2 = ui.getInput("player 2. name?");
+        ui.displayMessage("player two is "+ name2);
+        Player player1 = new Player(name1);
+        Player player2 = new Player(name2);
+        players.add(player1);
+        players.add(player2);
+    }
 
     private void mainMenu(){
         ui.displayMessage("1) Play game");
