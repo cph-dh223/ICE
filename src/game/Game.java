@@ -27,8 +27,17 @@ public class Game{
         }
         board = new Board(defaultWidth, defaultHeight, new HashSet(dict));
     }
-  
-    private void startGame(){throw new UnsupportedOperationException();}
+    
+    private void startGame(){
+        String name1 = ui.getInput("player 1. name?");
+        ui.displayMessage("player one is "+ name1);
+        String name2 = ui.getInput("player 2. name?");
+        ui.displayMessage("player two is "+ name2);
+        Player player1 = new Player(name1);
+        Player player2 = new Player(name2);
+        players.add(player1);
+        players.add(player2);
+    }
 
     private void mainMenu(){
         ui.displayMessage("1) Play game");
@@ -53,7 +62,21 @@ public class Game{
     }
     private void loadSavedGame(){throw new UnsupportedOperationException();}
     private void gameLoop(){throw new UnsupportedOperationException();}
-    private void endGame(){throw new UnsupportedOperationException();}
+    private void endGame() {
+        ui.displayMessage(  players.get(0).getName()+ ", you have " + players.get(0).getScore() + " points");
+        ui.displayMessage(  players.get(1).getName()+ ", you have " + players.get(1).getScore() + " points");
+
+        if (players.get(0).getScore() > players.get(1).getScore()) {
+            ui.displayMessage("Congratulations " + players.get(0).getName() + " you win!");
+        }
+       else if (players.get(0).getScore() < players.get(1).getScore()) {
+            ui.displayMessage("Congratulations " + players.get(1).getName() + " you win!");
+       }
+       else {
+            ui.displayMessage("It is a draw!");
+        }
+       close();
+    }
     private void close(){throw new UnsupportedOperationException();}
 
     private void removeLetters(List<Letter> takenLetters) {
@@ -80,4 +103,5 @@ public class Game{
         currentPlayer.addLetters(randomLetters);
         return randomLetters;
     }
+
 }
