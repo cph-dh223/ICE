@@ -1,3 +1,4 @@
+package game;
 
 public class Letter {
     public final char letter;

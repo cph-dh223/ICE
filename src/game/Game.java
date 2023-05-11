@@ -1,6 +1,10 @@
+package game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import board.Board;
+import util.IUI;
 
 public class Game{
     private ArrayList<Letter> letters;

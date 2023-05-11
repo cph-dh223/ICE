@@ -1,5 +1,8 @@
+package board;
 import java.util.List;
 import java.util.Set;
+
+import game.Letter;
 
 public class Board {
     private Tile[][] tiles;
