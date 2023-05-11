@@ -1,4 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class IO {
     private static IO instanse;
@@ -13,7 +18,14 @@ public class IO {
         return instanse;
     }
 
-    public static List<String> getDataFromTxt(String path){
-        throw new UnsupportedOperationException();
+    public static List<String> getDataFromTxt(String path) throws FileNotFoundException{
+        List<String> data = new LinkedList<>();
+
+        File file = new File(path);
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()){
+            data.add(scanner.nextLine());
+        }
+        return data;
     }
 }
