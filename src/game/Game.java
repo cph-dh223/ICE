@@ -1,7 +1,9 @@
 package game;
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
+
 
 import board.Board;
 import util.IUI;
@@ -9,6 +11,7 @@ import util.IUI;
 public class Game{
     private ArrayList<Letter> letters;
     private ArrayList<Player> players;
+
     private Player currentPlayer;
     private Board board;
     private IUI ui;
@@ -63,4 +66,5 @@ public class Game{
         currentPlayer.addLetters(randomLetters);
         return randomLetters;
     }
+
 }

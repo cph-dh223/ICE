@@ -5,6 +5,17 @@ public class Letter {
     public final int letterScore;
 
     public Letter(char letter, int letterScore){
-        throw new UnsupportedOperationException();
+
+        this.letter = letter;
+        this.letterScore = letterScore;
+    }
+
+    public char getLetter() {
+        return letter;
+    }
+
+    public int getLetterScore() {
+        return letterScore;
+
     }
 }
