@@ -1,4 +1,8 @@
+package game;
 import java.util.ArrayList;
+
+import board.Board;
+import util.IUI;
 
 public class Game{
     private ArrayList<Letter> letters;
