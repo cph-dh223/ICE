@@ -6,4 +6,12 @@ public class Letter {
     public Letter(char letter, int letterScore){
         throw new UnsupportedOperationException();
     }
+
+    public char getLetter() {
+        return letter;
+    }
+
+    public int getLetterScore() {
+        return letterScore;
+    }
 }
