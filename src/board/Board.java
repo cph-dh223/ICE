@@ -26,7 +26,6 @@ public class Board {
     public void updateBoard(){
         throw new UnsupportedOperationException();
     }
-    
     /**
      * This method assumes that there is more than letter that needs to be plased
      * @return the direction of the word that is beeing plased
@@ -37,6 +36,7 @@ public class Board {
         } else {
             return Direction.HORISONTAL;
         }
+
     }
 }
 
