@@ -1,3 +1,4 @@
+package board;
 
 public enum Multiplier {
     NORMAL,
