@@ -1,3 +1,6 @@
+package util;
+import board.Board;
+
 public interface IUI {
     public void displayMessige(String msg);
     public String getInput(String msg);
