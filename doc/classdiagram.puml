@@ -7,6 +7,7 @@ class Main{
 class Game{
     - ArrayList<Letter> letters
     - ArrayList<Player> players
+    - Player currentPlayer
     - Board board
     - IUI ui
 
@@ -17,9 +18,11 @@ class Game{
     - void gameLoop()
     - void endGame()
     - void close()
+    - void removeLetters()
+    - list addRandomLettersToPlayer()
 }
 interface IUI{
-    + void displayMessige(String msg)
+    + void displayMessage(String msg)
     + String getInput(String msg)
     + void displayBoard(Board board)
 }
