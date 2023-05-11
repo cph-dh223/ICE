@@ -1,0 +1,19 @@
+
+on:
+  pull_request:
+    branches:    
+      - main
+      
+jobs:
+  move-to-in-progress:
+    runs-on: ubuntu-latest
+    name: Move to In Progress Column
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Move to In Progress
+      uses: kin/gh-action-move-issue-to-column@1.0
+      with:
+        access-token: "#{{ secrets.GITHUB_TOKEN }}"
+        project-name: "ICE"
+        target-column: "Revew (pull request)"
