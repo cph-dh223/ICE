@@ -90,4 +90,5 @@ public class Game{
         currentPlayer.addLetters(randomLetters);
         return randomLetters;
     }
+
 }
