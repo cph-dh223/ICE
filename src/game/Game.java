@@ -11,7 +11,6 @@ import util.IUI;
 public class Game{
     private ArrayList<Letter> letters;
     private ArrayList<Player> players;
-
     private Player currentPlayer;
     private Board board;
     private IUI ui;
