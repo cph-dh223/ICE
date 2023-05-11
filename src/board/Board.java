@@ -29,5 +29,14 @@ public class Board {
     private Direction getWordDirection()    {
         throw new UnsupportedOperationException();
     }
+    public int getWidth()    {
+        throw new UnsupportedOperationException();
+    }
+    public int getHeight()    {
+        throw new UnsupportedOperationException();
+    }
+    public char getLetter(int x, int y){
+        throw new UnsupportedOperationException();
+    }
 }
 
