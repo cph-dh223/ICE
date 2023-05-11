@@ -10,7 +10,7 @@ public class Tile {
     public Tile(int positionX, int positionY, Multiplier multiplyer){
         throw new UnsupportedOperationException();
     }
-
+  
     public int getLetterScore(){
         return letter.getLetterScore();
     }
@@ -30,6 +30,4 @@ public class Tile {
     public int getPositionY() {
         return positionY;
     }
-    
-
 }
