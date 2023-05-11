@@ -1,6 +1,6 @@
 package board;
 
-import java.util.List
+import java.util.List;
 import java.util.Set;
 
 import game.Letter;
