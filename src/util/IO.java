@@ -19,6 +19,7 @@ public class IO {
         return instanse;
     }
 
+
     public static List<String> getDataFromTxt(String path) throws FileNotFoundException{
         List<String> data = new LinkedList<>();
 
