@@ -38,4 +38,16 @@ public class TextUI implements IUI{
             System.out.println();
         }
     }
+  
+    @Override
+    public String getInput(String msg) {
+        System.out.println(msg);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public void displayMessage(String msg) {
+        System.out.println(msg);
+    }
+
 }
