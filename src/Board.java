@@ -13,13 +13,10 @@ public class Board {
     private int width;
     private int height;
 
-    public Board(int width, int height, Set<String> dict) throws FileNotFoundException {
+    public Board(int width, int height, Set<String> dict){
         Tile[][] tiles = new Tile[15][15];
         width = 20;
         height = 20;
-        File file = new File("Dictionary.txt");
-        Scanner sc = new Scanner(file);
-        dict = new HashSet<String>();
     }
     public void placeLetter(int posX, int posY, Letter letter){
         throw new UnsupportedOperationException();
