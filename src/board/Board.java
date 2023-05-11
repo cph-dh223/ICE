@@ -37,5 +37,14 @@ public class Board {
         }
 
     }
+    public int getWidth()    {
+        throw new UnsupportedOperationException();
+    }
+    public int getHeight()    {
+        throw new UnsupportedOperationException();
+    }
+    public char getLetter(int x, int y){
+        throw new UnsupportedOperationException();
+    }
 }
 
