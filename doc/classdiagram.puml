@@ -60,13 +60,13 @@ enum Multiplier {
 
 class Board{
     - Tile[][] tiles
-    - List<Tile> toBePlased
+    - List<Tile> toBePlaced
     - Set<String> dict
     - int width
     - int height
 
     + Board(int width, int height, Set<String> dict)
-    + void plaseLetter(int posX, int posY, Letter letter)
+    + void placeLetter(int posX, int posY, Letter letter)
     - boolean checkSuroundingWords()
     + int checkWord()
     + void updateBoard()
