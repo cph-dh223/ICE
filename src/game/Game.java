@@ -17,10 +17,7 @@ public class Game{
     private IUI ui;
 
     public Game(ArrayList<Letter> letters, ArrayList<Player> players, Player currentPlayer, Board board) {
-        this.letters = letters;
-        this.players = players;
-        this.currentPlayer = currentPlayer;
-        this.board = board;
+        
     }
 
     private final int defaultWidth = 15;
