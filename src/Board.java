@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -9,16 +10,13 @@ public class Board {
     private int height;
 
     public Board(int width, int height, Set<String> dict){
-        throw new UnsupportedOperationException();
+        List<Tile> toBePlaced = new ArrayList<>();
     }
     public void placeLetter(int posX, int posY, Letter letter){
-        Tile = tiles;
-        // Find tiles in the tile list with the X and Y value.
-        // Save temp tile.
-        // Take new tile that you have saved and add the Letter that you get in the parameters.
-        // Add tobeplaced in the temp list.
+        Tile tile = new Tile(posX,posY,tiles[posX][posY].getMultiplier(),letter);
+        toBePlaced.add(tile);
     }
-    public boolean checkSuroundingWords(){
+    public boolean checkSurroundingWords(){
         throw new UnsupportedOperationException();
     }
     public int checkWord(){
