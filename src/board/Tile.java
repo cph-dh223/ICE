@@ -24,12 +24,18 @@ public class Tile {
         return multiplier;
     }
 
-    public char getLetter(){
+    public char getLetterChar(){
         return letter.getLetter();
     }
+
+    public Letter getLetter(){
+        return letter;
+    }
+    
     public void setLetter(Letter letter){
         this.letter = letter;
     }
+
 
     public int getPositionX() {
         return positionX;
