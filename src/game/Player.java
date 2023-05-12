@@ -38,4 +38,12 @@ public class Player {
     public String getName(){
         return this.name;
     }
+
+    public List<Letter> getLetters() {
+        return letters;
+    }
+
+    public Letter getLetter(char letter) {
+        return letters.get(letters.indexOf(letter));
+    }
 }
