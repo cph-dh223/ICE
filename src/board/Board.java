@@ -13,8 +13,6 @@ public class Board {
 
     public Board(int width, int height, Set<String> dict){
         Tile[][] tiles = new Tile[15][15];
-        this.width = width;
-        this.height = height;
         List<Tile> toBePlaced = new ArrayList<>();
     }
     public void placeLetter(int posX, int posY, Letter letter){
