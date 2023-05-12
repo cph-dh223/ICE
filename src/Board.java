@@ -15,8 +15,8 @@ public class Board {
 
     public Board(int width, int height, Set<String> dict){
         Tile[][] tiles = new Tile[15][15];
-        width = 20;
-        height = 20;
+        this.width = width;
+        this.height = height;
     }
     public void placeLetter(int posX, int posY, Letter letter){
         throw new UnsupportedOperationException();
