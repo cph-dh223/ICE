@@ -26,8 +26,11 @@ public class Tile {
         return multiplier;
     }
 
-    public char getLetter(){
+    public char getLetterChar(){
         return letter.getLetter();
+    }
+    public Letter getLetter(){
+        return letter;
     }
     public char setLetter(){throw new UnsupportedOperationException();}
 
