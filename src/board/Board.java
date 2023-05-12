@@ -13,7 +13,7 @@ public class Board {
     private int height;
 
     public Board(int width, int height, Set<String> dict){
-        Tile[][] tiles = new Tile[15][15];
+        Tile[][] tiles = new Tile[width][height];
         this.width = width;
         this.height = height;
         this.dict = dict;
