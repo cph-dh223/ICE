@@ -49,8 +49,11 @@ class Tile{
     - Multiplier multiplier
 
     + Tile(int positionX, int positionY, Multiplyer multiplyer)
+    + Tile(int positionX, int positionY, Multiplyer multiplyer, Letter letter)
     + int getLetterScore()
-    + char getLetter()
+    + char getLetterChar()
+    + Letter getLetter()
+    + void setLetter(Letter letter)
     + Multiplier getMultiplier()
 }
 enum Multiplier {
