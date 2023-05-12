@@ -10,6 +10,9 @@ import util.IO;
 import util.IUI;
 
 public class Game{
+    /**
+     * To save the BLANK letter in the letter list it needs to be repricented as a char and '#' was chosen
+     */
     private ArrayList<Letter> letters;
     private ArrayList<Player> players;
     private Player currentPlayer;
@@ -25,11 +28,26 @@ public class Game{
     private final int defaultWidth = 15;
     private final int defaultHeight = 15;
     private void dataSetup(){
-        List<String> dict = new LinkedList<String>();
+        List<String> dict = new ArrayList<String>();
+        List<String> lettersFromFile = new ArrayList<String>();
         try {
             dict = IO.getDataFromTxt("../data/Dictionary.txt");
         } catch (FileNotFoundException e) {
             ui.displayMessage("The dictionary file was not found please look in the data folder and make shure there is a \"Dictionary.txt\" file");
+        }
+        try {
+            lettersFromFile = IO.getDataFromTxt("../data/Letters.csv");
+        } catch (FileNotFoundException e) {
+            ui.displayMessage("The file with letters and their ammount and score was not found please look in the data folder and make shure there is a \"Letters.csv\" file");
+        }
+        for (String letterLine : lettersFromFile) {
+            String[] splitLetterLine = letterLine.split(",");
+
+            char letterChar = splitLetterLine[0].equals("BLANK") ? '#' : splitLetterLine[0].charAt(0);
+            int letterScore = Integer.parseInt(splitLetterLine[2]);
+            for (int i = 0; i < Integer.parseInt(splitLetterLine[1]); i++) {
+                letters.add(new Letter(letterChar, letterScore));
+            }
         }
         board = new Board(defaultWidth, defaultHeight, new HashSet(dict));
     }
