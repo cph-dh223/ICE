@@ -7,10 +7,12 @@ public class Tile {
     private int positionY;
     private Multiplier multiplier;
 
-    public Tile(int positionX, int positionY, Multiplier multiplier){
-        throw new UnsupportedOperationException();
+    public Tile(int positionX, int positionY, Multiplier multiplier) {
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.multiplier = multiplier;
     }
-  
+
     public int getLetterScore(){
         return letter.getLetterScore();
     }
