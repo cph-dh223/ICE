@@ -16,6 +16,10 @@ public class Game{
     private Board board;
     private IUI ui;
 
+    public Game(ArrayList<Letter> letters, ArrayList<Player> players, Player currentPlayer, Board board) {
+        
+    }
+
     private final int defaultWidth = 15;
     private final int defaultHeight = 15;
     private void dataSetup(){
