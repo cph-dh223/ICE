@@ -12,7 +12,12 @@ public class Tile {
         this.positionY = positionY;
         this.multiplier = multiplier;
     }
-
+    public Tile(int positionX, int positionY, Multiplier multiplier, Letter letter) {
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.multiplier = multiplier;
+        this.letter = letter;
+    }
     public int getLetterScore(){
         return letter.getLetterScore();
     }
@@ -24,6 +29,7 @@ public class Tile {
     public char getLetter(){
         return letter.getLetter();
     }
+    public char setLetter(){throw new UnsupportedOperationException();}
 
     public int getPositionX() {
         return positionX;

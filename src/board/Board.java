@@ -1,22 +1,24 @@
 package board;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import game.Letter;
 
 public class Board {
     private Tile[][] tiles;
-    private List<Tile> toBePlased;
+    private List<Tile> toBePlaced;
     private Set<String> dict;
     private int width;
     private int height;
 
     public Board(int width, int height, Set<String> dict){
-        throw new UnsupportedOperationException();
+        List<Tile> toBePlaced = new ArrayList<>();
     }
-    public void plaseLetter(int posX, int posY, Letter letter){
-        throw new UnsupportedOperationException();
+    public void placeLetter(int posX, int posY, Letter letter){
+        Tile tile = new Tile(posX,posY,tiles[posX][posY].getMultiplier(),letter);
+        toBePlaced.add(tile);
     }
-    public boolean checkSuroundingWords(){
+    public boolean checkSurroundingWords(){
         throw new UnsupportedOperationException();
     }
     public int checkWord(){
@@ -30,7 +32,7 @@ public class Board {
      * @return the direction of the word that is beeing plased
      */
     private Direction getWordDirection() {
-        if (toBePlased.get(0).getPositionX() == toBePlased.get(1).getPositionX()) {
+        if (toBePlaced.get(0).getPositionX() == toBePlaced.get(1).getPositionX()) {
             return Direction.VERTICAL;
         } else {
             return Direction.HORISONTAL;
