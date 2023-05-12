@@ -9,8 +9,8 @@ object Letter
 Main *-- Game
 Game o-- Player
 Game *-- Board 
-Game *-- Letters
-Player o-- Letters
+Game *-- Letter
+Player o-- Letter
 Board *-- Tiles
 Board o-- Letter
 

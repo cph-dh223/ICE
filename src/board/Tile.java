@@ -1,3 +1,5 @@
+package board;
+import game.Letter;
 
 public class Tile {
     private Letter letter;
@@ -5,7 +7,7 @@ public class Tile {
     private int positionY;
     private Multiplier multiplier;
 
-    public Tile(int positionX, int positionY, Multiplier multiplyer){
+    public Tile(int positionX, int positionY, Multiplier multiplier){
         throw new UnsupportedOperationException();
     }
 
@@ -15,17 +17,24 @@ public class Tile {
         this.multiplier = multiplier;
         this.letter = letter;
     }
-
     public int getLetterScore(){
-        throw new UnsupportedOperationException();
+        return letter.getLetterScore();
     }
+
     public Multiplier getMultiplier(){
-        throw new UnsupportedOperationException();
+        return multiplier;
     }
+
     public char getLetter(){
-        throw new UnsupportedOperationException();
+        return letter.getLetter();
     }
     public char setLetter(){throw new UnsupportedOperationException();}
 
+    public int getPositionX() {
+        return positionX;
+    }
 
+    public int getPositionY() {
+        return positionY;
+    }
 }

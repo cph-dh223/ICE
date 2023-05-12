@@ -1,6 +1,8 @@
+package board;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import game.Letter;
 
 public class Board {
     private Tile[][] tiles;
@@ -25,7 +27,25 @@ public class Board {
     public void updateBoard(){
         throw new UnsupportedOperationException();
     }
-    private Direction getWordDirection()    {
+    /**
+     * This method assumes that there is more than letter that needs to be plased
+     * @return the direction of the word that is beeing plased
+     */
+    private Direction getWordDirection() {
+        if (toBePlaced.get(0).getPositionX() == toBePlaced.get(1).getPositionX()) {
+            return Direction.VERTICAL;
+        } else {
+            return Direction.HORISONTAL;
+        }
+
+    }
+    public int getWidth()    {
+        throw new UnsupportedOperationException();
+    }
+    public int getHeight()    {
+        throw new UnsupportedOperationException();
+    }
+    public char getLetter(int x, int y){
         throw new UnsupportedOperationException();
     }
 }
