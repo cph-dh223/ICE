@@ -1,5 +1,6 @@
 package board;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import game.Letter;
@@ -12,6 +13,10 @@ public class Board {
     private int height;
 
     public Board(int width, int height, Set<String> dict){
+        Tile[][] tiles = new Tile[width][height];
+        this.width = width;
+        this.height = height;
+        this.dict = dict;
         List<Tile> toBePlaced = new ArrayList<>();
     }
     public void placeLetter(int posX, int posY, Letter letter){

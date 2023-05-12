@@ -16,8 +16,10 @@ public class Game{
     private Board board;
     private IUI ui;
 
-    public Game(ArrayList<Letter> letters, ArrayList<Player> players, Player currentPlayer, Board board) {
-        
+    public Game() {
+        dataSetup();
+        mainMenu();
+        close();
     }
 
     private final int defaultWidth = 15;
@@ -41,31 +43,109 @@ public class Game{
         Player player2 = new Player(name2);
         players.add(player1);
         players.add(player2);
+        gameLoop();
     }
 
     private void mainMenu(){
-        ui.displayMessage("1) Play game");
-        ui.displayMessage("2) Load game");
-        ui.displayMessage("3) Quit game");
-        String option = ui.getInput("Please type number to choose option");
         while(true) {
-        switch(option) {
-            case "1":
-                startGame();
-                break;
-            case "2":
-                loadSavedGame();
-                break;
-            case "3":
-                endGame();
-                break;
-            default:
-                ui.displayMessage("The input did not match any of the options, please try again");
+            ui.displayMessage("1) Play game");
+            ui.displayMessage("2) Load game");
+            ui.displayMessage("3) Quit game");
+            String option = ui.getInput("Please type number to choose option");
+            switch(option) {
+                case "1":
+                    startGame();
+                    break;
+                case "2":
+                    loadSavedGame();
+                    break;
+                case "3":
+                    endGame();
+                    break;
+                default:
+                    ui.displayMessage("The input did not match any of the options, please try again");
             }
         }
     }
     private void loadSavedGame(){throw new UnsupportedOperationException();}
-    private void gameLoop(){throw new UnsupportedOperationException();}
+    
+    private void gameLoop(){
+        currentPlayer = players.get(0);
+        while (true) {
+            
+            ui.displayMessage("1) Place letter(s)");
+            ui.displayMessage("2) Extange letter(s)");
+            ui.displayMessage("3) End the game");
+            ui.displayMessage("4) Save game");
+            String option = ui.getInput("Please type number to choose option");
+            switch (option) {
+                case "1":
+                    plaseLetters();
+                    break;
+                case "2":
+                    extangeLetters();
+                    break;
+                case "3":
+                    return;
+                case "4":
+                    // save game
+                    break;
+                default:
+                    ui.displayMessage("You did not choose one of the given options please choose");
+                    break;
+            }
+            
+            currentPlayer = players.get((players.indexOf(currentPlayer) + 1) % players.size());
+        }
+    }
+    
+    
+    private void plaseLetters() {
+        displayPlayerLetters(currentPlayer);
+        ui.displayMessage("Choose where to plase what letter in this format: x,y,letter. Or press enter to signal you are done with your selection");
+        List<Letter> toBePlasedLetters = new ArrayList<Letter>();
+        while(true){
+            String input = ui.getInput("Next letter or confirm selection");
+            if (input.equals("")) {
+                int playerScore = board.checkWord();
+                if (playerScore == -1) {
+                    ui.displayMessage("you did not plase a valid word please try again");
+                    plaseLetters();
+                }
+                currentPlayer.removeLetters(toBePlasedLetters);
+                currentPlayer.addScore(playerScore);
+                addRandomLettersToPlayer(toBePlasedLetters.size());
+                displayPlayerLetters(currentPlayer);
+                return;
+            }
+            String[] letter = input.replaceAll("\\W*", "").split(",");
+            board.plaseLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(letter[2].charAt(0)));
+        }
+    }
+    
+    
+    private void extangeLetters() {
+        displayPlayerLetters(currentPlayer);
+        String input = ui.getInput("Choose what letters to replace");
+        List<Letter> lettersToReplace = new ArrayList<>();
+        for(char c : input.replaceAll("\\W*,*", "replacement").toCharArray()){
+            lettersToReplace.add(currentPlayer.getLetter(c));
+        }
+        //TODO: order of operations, skal dem man bytter først tilføges til letters listen eller skal man først trejke nye og så tilføge dem man vil a med til listen
+        currentPlayer.removeLetters(lettersToReplace);
+        letters.addAll(lettersToReplace);
+        addRandomLettersToPlayer(lettersToReplace.size());
+    }
+    
+    private void displayPlayerLetters(Player player) {
+        String letters = "";
+        for (Letter letter : player.getLetters()) {
+            letters += letter.toString() + ", ";
+        }
+        ui.displayMessage("This is your letters:");
+        ui.displayMessage(letters);
+    }
+    
     private void endGame() {
         ui.displayMessage(  players.get(0).getName()+ ", you have " + players.get(0).getScore() + " points");
         ui.displayMessage(  players.get(1).getName()+ ", you have " + players.get(1).getScore() + " points");
@@ -85,7 +165,7 @@ public class Game{
 
     private void removeLetters(List<Letter> takenLetters) {
         for(Letter letter : takenLetters) {
-            this.letters.remove(letter); //TODO : Test that letters we try to remove exist in letters list
+            letters.remove(letter); //TODO : Test that letters we try to remove exist in letters list
         }
     }
 
@@ -99,12 +179,13 @@ public class Game{
         Random random = new Random();
         ArrayList<Letter> randomLetters = new ArrayList<>();
         for(int i = 0; i < amountOfLetters; i++) {
-            int intRandom = random.nextInt(this.letters.size());
-            Letter currentLetter = this.letters.get(intRandom);
+            int intRandom = random.nextInt(letters.size());
+            Letter currentLetter = letters.get(intRandom);
             randomLetters.add(currentLetter);
         }
 
         currentPlayer.addLetters(randomLetters);
+        removeLetters(randomLetters);
         return randomLetters;
     }
 

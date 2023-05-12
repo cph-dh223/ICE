@@ -16,4 +16,9 @@ public class Letter {
     public int getLetterScore() {
         return letterScore;
     }
+
+    @Override
+    public String toString(){
+        throw new UnsupportedOperationException();
+    }
 }
