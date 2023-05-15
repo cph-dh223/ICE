@@ -2,6 +2,7 @@ package util;
 
 import processing.core.PApplet;
 import board.Board;
+import processing.core.PGraphics;
 import processing.core.PShape;
 
 import java.sql.SQLOutput;
@@ -11,8 +12,7 @@ public class GUI extends PApplet implements IUI {
 
     private int width;
     private int height;
-
-
+    private PGraphics pg;
     private static GUI instanse;
 
 
@@ -31,22 +31,25 @@ public class GUI extends PApplet implements IUI {
 
     public void setup() {
         noLoop();
+        pg = createGraphics(width,height);
     }
 
-    private String tmp = "";
     public void draw() {
         background(255);
         fill(0);
         rect(100,100,100,100);
         textSize(20);
+        if(pg != null){
+            image(pg,0,0);
+        }
     }
     @Override
     public void displayMessage(String msg) {
         // Visually show message on screen
-        tmp = msg;
-        PShape(msg,100,100);
-        fill(100);
-        rect(200,200,100,100);
+        pg.beginDraw();
+        fill(0);
+        text(msg,100,100);
+        pg.endDraw();
         redraw();
         // noLoop
     }
