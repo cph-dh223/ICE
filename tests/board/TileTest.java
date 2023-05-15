@@ -80,7 +80,7 @@ class TileTest {
         Letter expected = a;
 
         tileWithOutLetter.setLetter(a);
-        Letter actual = tileWithOutLetter.getletter();
+        Letter actual = tileWithOutLetter.getLetter();
 
         assertEquals(expected, actual);
     }
