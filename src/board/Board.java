@@ -13,11 +13,21 @@ public class Board {
     private int height;
 
     public Board(int width, int height, Set<String> dict){
-        Tile[][] tiles = new Tile[width][height];
         this.width = width;
         this.height = height;
+        tiles = new Tile[width][height];
+        initTiels();
         this.dict = dict;
-        List<Tile> toBePlaced = new ArrayList<>();
+        toBePlaced = new ArrayList<>();
+    }
+
+
+    private void initTiels() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                tiles[i][j] = new Tile(i, j, Multiplier.NORMAL);
+            }
+        }
     }
     public void placeLetter(int posX, int posY, Letter letter){
         Tile tile = new Tile(posX,posY,tiles[posX][posY].getMultiplier(),letter);

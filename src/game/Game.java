@@ -8,6 +8,7 @@ import java.util.Random;
 import board.Board;
 import util.IO;
 import util.IUI;
+import util.TextUI;
 
 public class Game{
     /**
@@ -20,6 +21,9 @@ public class Game{
     private IUI ui;
 
     public Game() {
+        ui = new TextUI();
+        letters = new ArrayList<Letter>();
+        players = new ArrayList<Player>();
         dataSetup();
         mainMenu();
         close();
@@ -31,12 +35,12 @@ public class Game{
         List<String> dict = new ArrayList<String>();
         List<String> lettersFromFile = new ArrayList<String>();
         try {
-            dict = IO.getDataFromTxt("../data/Dictionary.txt");
+            dict = IO.getDataFromTxt("./data/Dictionary.txt");
         } catch (FileNotFoundException e) {
             ui.displayMessage("The dictionary file was not found please look in the data folder and make shure there is a \"Dictionary.txt\" file");
         }
         try {
-            lettersFromFile = IO.getDataFromTxt("../data/Letters.csv");
+            lettersFromFile = IO.getDataFromTxt("./data/Letters.csv");
         } catch (FileNotFoundException e) {
             ui.displayMessage("The file with letters and their ammount and score was not found please look in the data folder and make shure there is a \"Letters.csv\" file");
         }
@@ -58,7 +62,9 @@ public class Game{
         String name2 = ui.getInput("player 2. name?");
         ui.displayMessage("player two is "+ name2);
         Player player1 = new Player(name1);
+        addRandomLettersToPlayer(7, player1);
         Player player2 = new Player(name2);
+        addRandomLettersToPlayer(7, player2);
         players.add(player1);
         players.add(player2);
         gameLoop();
@@ -90,7 +96,7 @@ public class Game{
     private void gameLoop(){
         currentPlayer = players.get(0);
         while (true) {
-            
+            ui.displayMessage("Current player is: " + currentPlayer.getName());
             ui.displayMessage("1) Place letter(s)");
             ui.displayMessage("2) Extange letter(s)");
             ui.displayMessage("3) End the game");
@@ -132,12 +138,12 @@ public class Game{
                 }
                 currentPlayer.removeLetters(toBePlasedLetters);
                 currentPlayer.addScore(playerScore);
-                addRandomLettersToPlayer(toBePlasedLetters.size());
+                addRandomLettersToPlayer(toBePlasedLetters.size(), currentPlayer);
                 displayPlayerLetters(currentPlayer);
                 return;
             }
-            String[] letter = input.replaceAll("\\W*", "").split(",");
-            board.plaseLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(letter[2].charAt(0)));
+            String[] letter = input.replaceAll(" *", "").split(",");
+            board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(letter[2].charAt(0)));
         }
     }
     
@@ -152,13 +158,14 @@ public class Game{
         //TODO: order of operations, skal dem man bytter først tilføges til letters listen eller skal man først trejke nye og så tilføge dem man vil a med til listen
         currentPlayer.removeLetters(lettersToReplace);
         letters.addAll(lettersToReplace);
-        addRandomLettersToPlayer(lettersToReplace.size());
+        addRandomLettersToPlayer(lettersToReplace.size(), currentPlayer);
     }
     
     private void displayPlayerLetters(Player player) {
         String letters = "";
         for (Letter letter : player.getLetters()) {
-            letters += letter.toString() + ", ";
+            //letters += letter.toString() + ", ";
+            letters += letter.getLetter();
         }
         ui.displayMessage("This is your letters:");
         ui.displayMessage(letters);
@@ -191,7 +198,7 @@ public class Game{
      * This method can take list of letters from player, requested by the player, add them to this letter list
      * @List
      */
-    private List<Letter> addRandomLettersToPlayer(int amountOfLetters) {
+    private void addRandomLettersToPlayer(int amountOfLetters, Player player) {
         // Find random letters from letters list and use that list as parameter in player.addToLetters
         // remove from games list of letters
         Random random = new Random();
@@ -202,9 +209,8 @@ public class Game{
             randomLetters.add(currentLetter);
         }
 
-        currentPlayer.addLetters(randomLetters);
+        player.addLetters(randomLetters);
         removeLetters(randomLetters);
-        return randomLetters;
     }
 
 }
