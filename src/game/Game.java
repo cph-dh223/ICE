@@ -137,7 +137,7 @@ public class Game{
                 return;
             }
             String[] letter = input.replaceAll("\\W*", "").split(",");
-            board.plaseLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(letter[2].charAt(0)));
+            board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(letter[2].charAt(0)));
         }
     }
     
