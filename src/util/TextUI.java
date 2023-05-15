@@ -1,5 +1,6 @@
 package util;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import board.Board;
@@ -50,4 +51,10 @@ public class TextUI implements IUI{
         System.out.println(msg);
     }
 
+    @Override
+    public void displayMainMenu(ArrayList<String> menuFields) {
+        for (String field : menuFields) {
+            System.out.println(field + "\n");
+        }
+    }
 }
