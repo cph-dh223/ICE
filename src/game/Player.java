@@ -1,8 +1,9 @@
 package game;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private List<Letter> letters;
+    private List<Letter> letters = new ArrayList<>();
     private int score;
     private String name;
 
@@ -44,6 +45,13 @@ public class Player {
     }
 
     public Letter getLetter(char letter) {
-        return letters.get(letters.indexOf(letter));
+
+        int index = letters.indexOf(letter);
+        if(index < 0) {
+            return null;
+        }
+        else {
+            return letters.get(index);
+        }
     }
 }
