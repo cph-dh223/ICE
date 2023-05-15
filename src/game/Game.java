@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import board.Board;
+import util.GUI;
 import util.IO;
 import util.IUI;
 import util.TextUI;
@@ -21,7 +22,7 @@ public class Game{
     private IUI ui;
 
     public Game() {
-        ui = new TextUI();
+        ui = new GUI(800,800);
         letters = new ArrayList<Letter>();
         players = new ArrayList<Player>();
         dataSetup();

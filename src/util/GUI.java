@@ -3,6 +3,8 @@ package util;
 import processing.core.PApplet;
 import board.Board;
 
+import java.util.ArrayList;
+
 public class GUI extends PApplet implements IUI {
 
     private int width;
@@ -11,7 +13,7 @@ public class GUI extends PApplet implements IUI {
     public GUI (int width, int height) {
         this.width = width;
         this.height = height;
-        PApplet.main("GUI"); // Calls settings, then setup, then draw
+        PApplet.main("Main"); // Calls settings, then setup, then draw
     }
 
     public void settings(){
@@ -34,16 +36,17 @@ public class GUI extends PApplet implements IUI {
     }
 
     @Override
+    public void displayMainMenu(ArrayList<String> menuFields) {
+
+    }
+
+    @Override
     public String getInput(String msg) {
         return null;
     }
 
     @Override
     public void displayBoard(Board board) {
-
-    }
-
-    public void displayMainMenu() {
 
     }
 }
