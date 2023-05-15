@@ -19,6 +19,6 @@ public class Letter {
 
     @Override
     public String toString(){
-        return "letter: " + getLetter() + "letterScore:" + getLetterScore();
+        return "letter: " + getLetter() + ", letterScore:" + getLetterScore();
     }
 }
