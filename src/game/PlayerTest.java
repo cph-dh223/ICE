@@ -7,23 +7,38 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
+    Player name;
+    Player addScore;
+    Player getScore;
+    Letter a;
+
 
     @BeforeEach
     void setUp() {
+        a = new Letter('A', 1);
+        name = new Player("Alex");
     }
 
     @AfterEach
     void tearDown() {
+        addScore = null;
+        getScore = null;
     }
-
-    @Test
-    void addScore() {
-    }
-
     @Test
     void getScore() {
+        int expected = 1;
+        int actual = name.getScore();
+        assertEquals(expected, actual);
     }
+    @Test
+    void addScore() {
+        Letter expected = a;
 
+        name.addScore(1);
+        int actual = name.addScore(1);
+        assertEquals(expected, actual);
+
+    }
     @Test
     void removeLetters() {
     }
