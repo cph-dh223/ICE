@@ -9,6 +9,8 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        score = 0;
+        letters = new ArrayList<>();
     }
 
     public void addScore(int scoreToAdd){
@@ -44,14 +46,12 @@ public class Player {
         return letters;
     }
 
-    public Letter getLetter(char letter) {
-
-        int index = letters.indexOf(letter);
-        if(index < 0) {
-            return null;
+    public Letter getLetter(char c) {
+        for (Letter letter : letters) {
+            if(letter.getLetter() == c){
+                return letter;
+            }
         }
-        else {
-            return letters.get(index);
-        }
+        return null;
     }
 }
