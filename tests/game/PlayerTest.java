@@ -1,5 +1,7 @@
 package game;
 
+import game.Letter;
+import game.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +37,7 @@ class PlayerTest {
         Letter expected = a;
 
         name.addScore(1);
-        int actual = name.addScore(1);
+        int actual = name.getScore();
         assertEquals(expected, actual);
 
     }
