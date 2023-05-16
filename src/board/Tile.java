@@ -28,14 +28,13 @@ public class Tile {
         return letter.getLetter();
     }
 
-    public Letter getLetter(){
-        return letter;
-    }
-    
     public void setLetter(Letter letter){
         this.letter = letter;
     }
 
+    public Letter getLetter() {
+        return letter;
+    }
 
     public int getPositionX() {
         return positionX;
