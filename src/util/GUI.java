@@ -10,10 +10,11 @@ import java.util.ArrayList;
 
 public class GUI extends PApplet implements IUI {
 
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
     private PGraphics pg;
     private static GUI instanse;
+    private final int sizeOfText = 50;
 
 
     public GUI(){
@@ -37,26 +38,40 @@ public class GUI extends PApplet implements IUI {
     public void draw() {
         background(255);
         fill(0);
-        rect(100,100,100,100);
-        textSize(20);
-        if(pg != null){
-            image(pg,0,0);
-        }
+        image(pg,0,0);
     }
+    
     @Override
     public void displayMessage(String msg) {
         // Visually show message on screen
         pg.beginDraw();
-        fill(0);
-        text(msg,100,100);
+        pg.fill(0);
+        pg.text(msg,100,100);
         pg.endDraw();
+
         redraw();
         // noLoop
     }
 
+    /**
+     * This method can display any menu. The options are desplayed in the middle of the screen
+     * @param menuFields the list of menu options
+     */
     @Override
-    public void displayMainMenu(ArrayList<String> menuFields) {
-
+    public void displayMenu(String[] menuFields) {
+        pg.beginDraw();
+        pg.background(255);
+        pg.fill(0);
+        pg.textSize(sizeOfText);
+        pg.strokeWeight(15);
+        int posX = (width/2) - (int)textWidth(menuFields[0])*2;
+        int spasing = sizeOfText + (int)(sizeOfText*0.2);
+        for (int i = 0; i < menuFields.length; i++) {
+            int posY = (height/2) - (spasing * menuFields.length/2) + (spasing * i) ;
+            pg.text(menuFields[i], posX, posY);
+        }
+        pg.endDraw();
+        redraw();
     }
 
     @Override

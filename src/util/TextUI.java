@@ -52,9 +52,9 @@ public class TextUI implements IUI{
     }
 
     @Override
-    public void displayMainMenu(ArrayList<String> menuFields) {
+    public void displayMenu(String[] menuFields) {
         for (String field : menuFields) {
-            System.out.println(field + "\n");
+            System.out.println(field);
         }
     }
 }
