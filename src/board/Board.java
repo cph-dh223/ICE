@@ -26,9 +26,13 @@ public class Board {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 tiles[i][j] = new Tile(i, j, Multiplier.NORMAL);
+                if(tiles[posX][posY] = new Tile(1,1, Multiplier.NORMAL)){
+
+                }
             }
         }
     }
+    // If statements: if this tile is on certain x,y coordinate then the multiplier is set to ____
     public void placeLetter(int posX, int posY, Letter letter){
         Tile tile = new Tile(posX,posY,tiles[posX][posY].getMultiplier(),letter);
         toBePlaced.add(tile);
