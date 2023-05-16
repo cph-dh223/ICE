@@ -1,7 +1,7 @@
 package board;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -80,7 +80,7 @@ class TileTest {
         Letter expected = a;
 
         tileWithOutLetter.setLetter(a);
-        Letter actual = tileWithOutLetter.getletter();
+        Letter actual = tileWithOutLetter.getLetter();
 
         assertEquals(expected, actual);
     }

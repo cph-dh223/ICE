@@ -16,13 +16,13 @@ public class Board {
         this.width = width;
         this.height = height;
         tiles = new Tile[width][height];
-        initTiels();
+        initTiles();
         this.dict = dict;
         toBePlaced = new ArrayList<>();
     }
 
 
-    private void initTiels() {
+    private void initTiles() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 tiles[i][j] = new Tile(i, j, Multiplier.NORMAL);
