@@ -61,7 +61,19 @@ public class GUI extends PApplet implements IUI {
 
     @Override
     public String getInput(String msg) {
-        return null;
+        System.out.println(msg);
+        String coordinates = "mouseX: ";
+        while(!mousePressed){}
+        return coordinates += mouseX + " mouseY: "; // Generic method for getting exact input
+    }
+
+    public String getInputMainMenu() {
+        return "";
+    }
+
+    @Override
+    public void mousePressed() {
+        super.mousePressed();
     }
 
     @Override
