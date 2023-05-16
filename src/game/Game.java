@@ -142,9 +142,7 @@ public class Game{
                 displayPlayerLetters(currentPlayer);
                 return;
             }
-
             String[] letter = input.replaceAll(" *", "").split(",");
-
             board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(letter[2].charAt(0)));
         }
     }
