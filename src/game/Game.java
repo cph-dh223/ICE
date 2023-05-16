@@ -104,7 +104,7 @@ public class Game{
             String option = ui.getInput("Please type number to choose option");
             switch (option) {
                 case "1":
-                    plaseLetters();
+                    placeLetters();
                     break;
                 case "2":
                     extangeLetters();
@@ -124,7 +124,7 @@ public class Game{
     }
     
     
-    private void plaseLetters() {
+    private void placeLetters() {
         displayPlayerLetters(currentPlayer);
         ui.displayMessage("Choose where to plase what letter in this format: x,y,letter. Or press enter to signal you are done with your selection");
         List<Letter> toBePlasedLetters = new ArrayList<Letter>();
@@ -134,7 +134,7 @@ public class Game{
                 int playerScore = board.checkWord();
                 if (playerScore == -1) {
                     ui.displayMessage("you did not plase a valid word please try again");
-                    plaseLetters();
+                    placeLetters();
                 }
                 currentPlayer.removeLetters(toBePlasedLetters);
                 currentPlayer.addScore(playerScore);
@@ -142,7 +142,9 @@ public class Game{
                 displayPlayerLetters(currentPlayer);
                 return;
             }
+
             String[] letter = input.replaceAll(" *", "").split(",");
+
             board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(letter[2].charAt(0)));
         }
     }
