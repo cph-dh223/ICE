@@ -73,9 +73,8 @@ public class Game{
 
     private void mainMenu(){
         while(true) {
-            ui.displayMessage("1) Play game");
-            ui.displayMessage("2) Load game");
-            ui.displayMessage("3) Quit game");
+
+            ui.displayMenu(new String[]{"1) Play game", "2) Load game", "3) Quit game"});
             String option = ui.getInput("Please type number to choose option");
             switch(option) {
                 case "1":
@@ -98,10 +97,7 @@ public class Game{
         currentPlayer = players.get(0);
         while (true) {
             ui.displayMessage("Current player is: " + currentPlayer.getName());
-            ui.displayMessage("1) Place letter(s)");
-            ui.displayMessage("2) Extange letter(s)");
-            ui.displayMessage("3) End the game");
-            ui.displayMessage("4) Save game");
+            ui.displayMenu(new String[]{"1) Place letter(s)","2) Extange letter(s)","3) End the game","4) Save game"});
             String option = ui.getInput("Please type number to choose option");
             switch (option) {
                 case "1":
