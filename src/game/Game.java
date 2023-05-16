@@ -68,6 +68,8 @@ public class Game{
         addRandomLettersToPlayer(7, player2);
         players.add(player1);
         players.add(player2);
+
+        ui.displayBoard(board);
         gameLoop();
     }
 
@@ -96,6 +98,7 @@ public class Game{
     private void gameLoop(){
         currentPlayer = players.get(0);
         while (true) {
+            ui.displayBoard(board);
             ui.displayMessage("Current player is: " + currentPlayer.getName());
             ui.displayMenu(new String[]{"1) Place letter(s)","2) Extange letter(s)","3) End the game","4) Save game"});
             String option = ui.getInput("Please type number to choose option");
