@@ -126,19 +126,19 @@ public class Game{
     
     private void placeLetters() {
         displayPlayerLetters(currentPlayer);
-        ui.displayMessage("Choose where to plase what letter in this format: x,y,letter. Or press enter to signal you are done with your selection");
-        List<Letter> toBePlasedLetters = new ArrayList<Letter>();
+        ui.displayMessage("Choose where to place what letter in this format: x,y,letter. Or press enter to signal you are done with your selection");
+        List<Letter> toBePlacedLetters = new ArrayList<Letter>();
         while(true){
             String input = ui.getInput("Next letter or confirm selection");
             if (input.equals("")) {
                 int playerScore = board.checkWord();
                 if (playerScore == -1) {
-                    ui.displayMessage("you did not plase a valid word please try again");
+                    ui.displayMessage("you did not place a valid word please try again");
                     placeLetters();
                 }
-                currentPlayer.removeLetters(toBePlasedLetters);
+                currentPlayer.removeLetters(toBePlacedLetters);
                 currentPlayer.addScore(playerScore);
-                addRandomLettersToPlayer(toBePlasedLetters.size(), currentPlayer);
+                addRandomLettersToPlayer(toBePlacedLetters.size(), currentPlayer);
                 displayPlayerLetters(currentPlayer);
                 return;
             }
