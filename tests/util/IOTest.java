@@ -1,43 +1,43 @@
 package util;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import util.IO;
 
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
-class IOTest {
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
+public class IOTest {
 
     @Test
-    void getInstance() {
+    public void testGetInstance() {
+
+        IO expectedInstance = IO.getInstance();
+
+
+        IO actualInstance = IO.getInstance();
+
+
+        assertEquals(expectedInstance, actualInstance);
     }
 
+
     @Test
-    void getDataFromTxt() {
-        String path = "testfile.txt";
-        String expectedLine1 = "Line 1";
-        String expectedLine2 = "Line 2";
+    public void testGetDataFromTxt() throws FileNotFoundException {
+
+        String path = "./data/testfile.txt";
 
 
-        Scanner scan = new Scanner(path);
+        List<String> expectedData = List.of("Line 1", "Line 2");
 
 
-            A
-            Assertions.assertEquals(expectedLine1, data.get(0));
-            Assertions.assertEquals(expectedLine2, data.get(1));
+
+            List<String> actualData = IO.getDataFromTxt(path);
+
+
+            Assertions.assertEquals(expectedData, actualData);
 
     }
 }
