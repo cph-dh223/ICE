@@ -47,17 +47,16 @@ class PlayerTest {
     }
     @Test
     void removeLetters() {
-        Letter expected = a;
-        //ArrayList<Letter> addLetters = new ArrayList<>();
-        //addLetters.add
-        name.removeLetters((List<Letter>)a);
-        Letter actual = name.getLetter('a');
+        Letter expected = null;
+        ArrayList<Letter> addLetters = new ArrayList<>();
+        addLetters.add(new Letter('b', 2));
+        name.removeLetters(addLetters);
+        Letter actual = name.getLetter('b');
         assertEquals(expected, actual);
     }
 
     @Test
     void addLetters() {
-        //Letter expected = new Letter('b',2);
         ArrayList<Letter> addLetter = new ArrayList<>();
         addLetter.add(new Letter('b', 2));
         name.addLetters(addLetter);
