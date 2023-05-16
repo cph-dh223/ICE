@@ -76,19 +76,34 @@ public class GUI extends PApplet implements IUI {
 
     @Override
     public String getInput(String msg) {
+        // Returns key pressed as a String(1, 2, 3 or other...)
+
         System.out.println(msg);
+        String option = String.valueOf(getInputMainMenu());
+        return option;
+
+        /*
+        // returns String with coordinates
         String coordinates = "mouseX: ";
-        while(!mousePressed){}
-        return coordinates += mouseX + " mouseY: "; // Generic method for getting exact input
+        while(true) {
+            System.out.println("Waiting for input"); // TODO: Some line has to be here for some reason??
+            if(mousePressed) {
+                coordinates += mouseX + " mouseY: " + mouseY; // Generic method for getting exact input
+                System.out.println(coordinates);
+                return coordinates;
+            }
+        }
+
+         */
     }
 
-    public String getInputMainMenu() {
-        return "";
-    }
-
-    @Override
-    public void mousePressed() {
-        super.mousePressed();
+    private char getInputMainMenu() {
+        while (true) {
+            System.out.println("Waiting for input"); // TODO: Some line has to be here for some reason??
+            if(keyPressed){
+                return key;
+            }
+        }
     }
 
     @Override
