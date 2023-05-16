@@ -1,12 +1,6 @@
-import board.Tile;
-import game.Letter;
-
+import game.Game;
 public class Main {
-
-
-
     public static void main(String[] args) {
-        Letter bogstav = new Letter('a', 5);
-        System.out.println(bogstav);
+        new Game();
     }
 }
