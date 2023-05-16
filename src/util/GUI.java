@@ -16,6 +16,7 @@ public class GUI extends PApplet implements IUI {
     private final int sizeOfText = 50;
     private PImage boardImage;
 
+    TextUI tui = new TextUI();
 
     public GUI(){
         instanse = this;
@@ -82,7 +83,7 @@ public class GUI extends PApplet implements IUI {
 
     @Override
     public String getInput(String msg) {
-        return null;
+        return tui.getInput(msg);
     }
 
     @Override
@@ -99,8 +100,18 @@ public class GUI extends PApplet implements IUI {
         for(int i = 0; i < board.getWidth(); i++){
             for (int j = 0; j < board.getHeight(); j++) {
                 Tile currentTile =board.getTile(i, j);
+                boardGraphic.fill(255);
                 if(currentTile.getMultiplier() == Multiplier.DOUBLE_LETTER){
-                    boardGraphic.fill(255,100,0);
+                    boardGraphic.fill(150,150,255);
+                }
+                if(currentTile.getMultiplier() == Multiplier.DOUBLE_WORD){
+                    boardGraphic.fill(255,150,150);
+                }
+                if(currentTile.getMultiplier() == Multiplier.TRIPLE_LETTER){
+                    boardGraphic.fill(0,0,255);
+                }
+                if(currentTile.getMultiplier() == Multiplier.TRIPLE_WORD){
+                    boardGraphic.fill(255,0,0);
                 }
                 
                 boardGraphic.rect(i * tileSize + strokeWeight/2,j*tileSize + strokeWeight/2,tileSize,tileSize);
