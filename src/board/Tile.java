@@ -36,6 +36,7 @@ public class Tile {
         return letter;
     }
 
+    
     public int getPositionX() {
         return positionX;
     }
