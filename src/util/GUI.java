@@ -15,6 +15,8 @@ public class GUI extends PApplet implements IUI {
     private PGraphics pg;
     private static GUI instanse;
     private final int sizeOfText = 50;
+    private PGraphics textBox;
+    private String inputText;
 
 
     public GUI(){
@@ -31,14 +33,16 @@ public class GUI extends PApplet implements IUI {
     }
 
     public void setup() {
-        noLoop();
+        //noLoop();
         pg = createGraphics(width,height);
+        textBox = createGraphics(width,height);
     }
 
     public void draw() {
         background(255);
         fill(0);
         image(pg,0,0);
+        image(textBox,0,0);
     }
     
     @Override
@@ -79,22 +83,50 @@ public class GUI extends PApplet implements IUI {
         // Returns key pressed as a String(1, 2, 3 or other...)
 
         System.out.println(msg);
-        String option = String.valueOf(getInputMainMenu());
+        String option = getInputTextBox();
+        //String option = String.valueOf(getInputMainMenu());
         return option;
 
-        /*
-        // returns String with coordinates
+    }
+
+    private String getInputCoordinates() {
         String coordinates = "mouseX: ";
         while(true) {
             System.out.println("Waiting for input"); // TODO: Some line has to be here for some reason??
-            if(mousePressed) {
+            if (mousePressed) {
                 coordinates += mouseX + " mouseY: " + mouseY; // Generic method for getting exact input
                 System.out.println(coordinates);
                 return coordinates;
             }
         }
+    }
 
-         */
+    // Visual TextBox as a replacement for console
+    private String getInputTextBox() {
+        inputText = "";
+        String tmpText;
+        while(true) {
+            if (keyPressed) {
+                if (keyCode == ENTER) {
+                    tmpText = inputText;
+                    textBox.beginDraw();
+                    textBox.clear();
+                    textBox.endDraw();
+                    return tmpText;
+                }
+            }
+            displayMessage(""); // TODO: Some line has to be here for some reason??
+        }
+    }
+
+
+    private void displayTextBox() {
+        textBox.beginDraw();
+        textBox.fill(0);
+        textBox.textSize(30);
+        textBox.text(inputText, width/4, height-60);
+        textBox.endDraw();
+        redraw();
     }
 
     private char getInputMainMenu() {
@@ -109,5 +141,14 @@ public class GUI extends PApplet implements IUI {
     @Override
     public void displayBoard(Board board) {
 
+    }
+
+    @Override
+    public void keyPressed() {
+
+        if (key >= 'A' && key <= 'z' || key >= '0' && key <= '9') {
+            inputText += key;
+        }
+        displayTextBox();
     }
 }
