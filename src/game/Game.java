@@ -167,8 +167,7 @@ public class Game{
             //letters += letter.toString() + ", ";
             letters += letter.getLetter();
         }
-        ui.displayMessage("This is your letters:");
-        ui.displayMessage(letters);
+        ui.displayMessage("This is your letters:" + letters);
     }
     
     private void endGame() {
