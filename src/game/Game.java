@@ -59,9 +59,9 @@ public class Game{
     
     private void startGame(){
         String name1 = ui.getInput("player 1. name?");
-        ui.displayMessage("player one is "+ name1);
+        ui.displayMessage("player one is: "+ name1);
         String name2 = ui.getInput("player 2. name?");
-        ui.displayMessage("player two is "+ name2);
+        ui.displayMessage("player two is: "+ name2);
         Player player1 = new Player(name1);
         addRandomLettersToPlayer(7, player1);
         Player player2 = new Player(name2);
