@@ -22,8 +22,8 @@ public class Game{
     private IUI ui;
 
     public Game() {
-//        ui = GUI.getInstance();
-        ui = new TextUI();
+        ui = GUI.getInstance();
+        // ui = new TextUI();
         letters = new ArrayList<Letter>();
         players = new ArrayList<Player>();
         dataSetup();

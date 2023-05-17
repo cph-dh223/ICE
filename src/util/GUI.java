@@ -1,11 +1,13 @@
 package util;
 
+import game.Letter;
 import processing.core.*;
 import board.Board;
 import board.Multiplier;
 import board.Tile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GUI extends PApplet implements IUI {
     
@@ -14,6 +16,7 @@ public class GUI extends PApplet implements IUI {
     
     private PGraphics menuGraphic;
     private PGraphics msgGraphic;
+    private PGraphics handGraphic;
     
     private PImage boardImage;
 
@@ -34,6 +37,7 @@ public class GUI extends PApplet implements IUI {
         noLoop();
         menuGraphic = createGraphics(width/2,height/2);
         msgGraphic = createGraphics(width,height/10);
+        handGraphic = createGraphics(width/2, height/5);
     }
 
     public void draw() {
@@ -41,6 +45,7 @@ public class GUI extends PApplet implements IUI {
         fill(0);
         image(menuGraphic,20,50);
         image(msgGraphic,20,(3 * height)/4);
+        image(handGraphic,width/2,height - sizeOfText * 2);
         if(boardImage != null){
             image(boardImage,width/2,0);
         }
@@ -67,7 +72,7 @@ public class GUI extends PApplet implements IUI {
     @Override
     public void displayMenu(String[] menuFields) {
         if(msgGraphic.image != null){
-            msgGraphic.clear();
+            //msgGraphic.clear();
         }
         menuGraphic.beginDraw();
         menuGraphic.background(255);
@@ -133,5 +138,24 @@ public class GUI extends PApplet implements IUI {
 
         redraw();
     }
-    
+
+    @Override
+    public void displayHand(List<Letter> letters) {
+        handGraphic.beginDraw();
+        handGraphic.background(255);
+        handGraphic.textSize(sizeOfText);
+        handGraphic.strokeWeight(3);
+        handGraphic.textAlign(3,102);//center,bottom
+        for (int i = 0; i < letters.size(); i++) {
+            char letter = letters.get(i).getLetter();
+            handGraphic.fill(255);
+            handGraphic.rect(i * sizeOfText + (sizeOfText/2), (sizeOfText / 5), sizeOfText , sizeOfText);
+            handGraphic.fill(0);
+            handGraphic.text(letter, i * sizeOfText + sizeOfText,50);
+        }
+        handGraphic.endDraw();
+        redraw();
+
+    }
+
 }
