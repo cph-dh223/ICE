@@ -68,6 +68,8 @@ public class Game{
         addRandomLettersToPlayer(7, player2);
         players.add(player1);
         players.add(player2);
+
+        ui.displayBoard(board);
         gameLoop();
     }
 
@@ -96,12 +98,13 @@ public class Game{
     private void gameLoop(){
         currentPlayer = players.get(0);
         while (true) {
+            ui.displayBoard(board);
             ui.displayMessage("Current player is: " + currentPlayer.getName());
             ui.displayMenu(new String[]{"1) Place letter(s)","2) Extange letter(s)","3) End the game","4) Save game"});
             String option = ui.getInput("Please type number to choose option");
             switch (option) {
                 case "1":
-                    plaseLetters();
+                    placeLetters();
                     break;
                 case "2":
                     extangeLetters();
@@ -121,21 +124,21 @@ public class Game{
     }
     
     
-    private void plaseLetters() {
+    private void placeLetters() {
         displayPlayerLetters(currentPlayer);
-        ui.displayMessage("Choose where to plase what letter in this format: x,y,letter. Or press enter to signal you are done with your selection");
-        List<Letter> toBePlasedLetters = new ArrayList<Letter>();
+        ui.displayMessage("Choose where to place what letter in this format: x,y,letter. Or press enter to signal you are done with your selection");
+        List<Letter> toBePlacedLetters = new ArrayList<Letter>();
         while(true){
             String input = ui.getInput("Next letter or confirm selection");
             if (input.equals("")) {
                 int playerScore = board.checkWord();
                 if (playerScore == -1) {
-                    ui.displayMessage("you did not plase a valid word please try again");
-                    plaseLetters();
+                    ui.displayMessage("you did not place a valid word please try again");
+                    placeLetters();
                 }
-                currentPlayer.removeLetters(toBePlasedLetters);
+                currentPlayer.removeLetters(toBePlacedLetters);
                 currentPlayer.addScore(playerScore);
-                addRandomLettersToPlayer(toBePlasedLetters.size(), currentPlayer);
+                addRandomLettersToPlayer(toBePlacedLetters.size(), currentPlayer);
                 displayPlayerLetters(currentPlayer);
                 return;
             }
