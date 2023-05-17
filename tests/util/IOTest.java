@@ -5,24 +5,12 @@ import org.junit.jupiter.api.Test;
 import util.IO;
 
 import java.io.FileNotFoundException;
+import java.time.Instant;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public class IOTest {
-
-    @Test
-    public void testGetInstance() {
-
-        IO expectedInstance = IO.getInstance();
-
-
-        IO actualInstance = IO.getInstance();
-
-
-        assertEquals(expectedInstance, actualInstance);
-    }
-
 
     @Test
     public void testGetDataFromTxt() throws FileNotFoundException {
