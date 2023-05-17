@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private List<Letter> letters;
+    private List<Letter> letters = new ArrayList<>();
     private int score;
     private String name;
 
