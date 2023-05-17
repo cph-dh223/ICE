@@ -24,7 +24,7 @@ public class GUI extends PApplet implements IUI {
 
     public GUI(){
         instanse = this;
-        clicked = false;
+
     }
     public static GUI getInstance(){
         return instanse;
@@ -92,11 +92,19 @@ public class GUI extends PApplet implements IUI {
 
     @Override
     public String getInput(String msg) {
-        // Returns key pressed as a String(1, 2, 3 or other...)
-        System.out.println(getMouseInputPlaceLetter());
-        System.out.println(msg);
-        String option = getInputTextBox();
-        //String option = String.valueOf(getInputMainMenu());
+        clicked = false;
+        String option = "";
+        displayMessage(msg);
+        if(keyPressed) {
+            option = getInputTextBox();
+        }
+        else {
+            try {
+                option = getMouseInputPlaceLetter();
+            } catch (IllegalArgumentException e) {
+                getInput(msg);
+            }
+        }
         return option;
 
     }
@@ -154,7 +162,7 @@ public class GUI extends PApplet implements IUI {
     public void displayBoard(Board board) {
         PGraphics boardGraphic = createGraphics(width/2,width/2);
 
-        int tileSize = boardGraphic.width/board.getWidth();
+        tileSize = boardGraphic.width/board.getWidth();
         int strokeWeight = 5;
         boardGraphic.beginDraw();
         boardGraphic.stroke(0);
@@ -203,13 +211,16 @@ public class GUI extends PApplet implements IUI {
         displayTextBox();
     }
 
-    public String getMouseInputPlaceLetter() {
-
+    public String getMouseInputPlaceLetter() throws IllegalArgumentException{
         int x = -1;
         int y = -1;
+
         if(clicked) {
-            x = (finalMouseX - width/2)/tileSize;
-            y = finalMouseY/tileSize;
+            x = (int)map(finalMouseX, width/2, width, 0, 15);
+            y = (int)map(finalMouseY, 0, width/2, 0, 15);
+            if (x < 0 || x > 14 || y < 0 || y > 14) {
+                throw new IllegalArgumentException();
+            }
         }
         return ""+x+","+y;
     }
@@ -218,5 +229,6 @@ public class GUI extends PApplet implements IUI {
         finalMouseX = mouseX;
         finalMouseY = mouseY;
         clicked = true;
+        System.out.println(getMouseInputPlaceLetter());
     }
 }
