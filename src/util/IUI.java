@@ -11,5 +11,5 @@ public interface IUI {
     public void displayMenu(String[] menuFields);
     public String getInput(String msg);
     public void displayBoard(Board board);
-    public void displayHand(List<Letter> letters);
+    public void displayHand(String playerName,List<Letter> letters);
 }

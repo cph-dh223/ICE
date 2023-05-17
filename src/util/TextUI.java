@@ -61,7 +61,7 @@ public class TextUI implements IUI{
     }
 
     @Override
-    public void displayHand(List<Letter> letters){
+    public void displayHand(String playerName, List<Letter> letters){
         String lettersString = "";
         for (Letter letter : letters) {
             lettersString += letter.toString() + ", ";

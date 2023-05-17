@@ -102,6 +102,7 @@ public class Game{
             ui.displayBoard(board);
             ui.displayMessage("Current player is: " + currentPlayer.getName());
             ui.displayMenu(new String[]{"1) Place letter(s)","2) Extange letter(s)","3) End the game","4) Save game"});
+            displayPlayerLetters(currentPlayer);
             String option = ui.getInput("Please type number to choose option");
             switch (option) {
                 case "1":
@@ -126,9 +127,8 @@ public class Game{
     
     
     private void placeLetters() {
-        displayPlayerLetters(currentPlayer);
         ui.displayMessage("Choose where to place what letter in this format: x,y,letter. Or press enter to signal you are done with your selection");
-        List<Letter> toBePlacedLetters = new ArrayList<Letter>();
+        List<Letter> toBePlacedLetters = new ArrayList<Letter>(1);
         while(true){
             String input = ui.getInput("Next letter or confirm selection");
             if (input.equals("")) {
@@ -150,10 +150,10 @@ public class Game{
     
     
     private void extangeLetters() {
-        displayPlayerLetters(currentPlayer);
         String input = ui.getInput("Choose what letters to replace");
         List<Letter> lettersToReplace = new ArrayList<>();
-        for(char c : input.replaceAll("\\W*,*", "replacement").toCharArray()){
+        char[] charsToReplase = input.replaceAll(" *,*", "").toCharArray();
+        for(char c : charsToReplase){
             lettersToReplace.add(currentPlayer.getLetter(c));
         }
         //TODO: order of operations, skal dem man bytter først tilføges til letters listen eller skal man først trejke nye og så tilføge dem man vil a med til listen
@@ -163,8 +163,7 @@ public class Game{
     }
     
     private void displayPlayerLetters(Player player) {
-
-        ui.displayHand(player.getLetters());
+        ui.displayHand(player.getName() ,player.getLetters());
     }
     
     private void endGame() {

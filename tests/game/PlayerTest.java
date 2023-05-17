@@ -46,10 +46,12 @@ class PlayerTest {
 
     }
     @Test
-    void removeLetters() {
+    void
+    removeLetters() {
         Letter expected = null;
         ArrayList<Letter> addLetters = new ArrayList<>();
         addLetters.add(new Letter('b', 2));
+        name.addLetters(addLetters);
         name.removeLetters(addLetters);
         Letter actual = name.getLetter('b');
         assertEquals(expected, actual);

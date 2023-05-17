@@ -241,19 +241,24 @@ public class GUI extends PApplet implements IUI {
         finalMouseY = mouseY;
         clicked = true;
     }
+    @Override
+    public void displayHand(String playerName,List<Letter> letters) {
+        String playerString = "Current player:" + playerName;
 
-    public void displayHand(List<Letter> letters) {
         handGraphic.beginDraw();
         handGraphic.background(255);
         handGraphic.textSize(sizeOfText);
         handGraphic.strokeWeight(3);
+        handGraphic.fill(0);
+        handGraphic.textAlign(37,102); //Left, bottom
+        handGraphic.text(playerString,0,50);
         handGraphic.textAlign(3,102);//center,bottom
         for (int i = 0; i < letters.size(); i++) {
             char letter = letters.get(i).getLetter();
             handGraphic.fill(255);
-            handGraphic.rect(i * sizeOfText + (sizeOfText/2), (sizeOfText / 5), sizeOfText , sizeOfText);
+            handGraphic.rect(-(i * sizeOfText) + handGraphic.width - (int)(sizeOfText * 1.5), (sizeOfText / 5), sizeOfText , sizeOfText);
             handGraphic.fill(0);
-            handGraphic.text(letter, i * sizeOfText + sizeOfText,50);
+            handGraphic.text(letter, -(i * sizeOfText) + handGraphic.width - sizeOfText,50);
         }
         handGraphic.endDraw();
         redraw();
