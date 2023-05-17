@@ -1,11 +1,14 @@
 package game;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import board.Board;
+import board.Tile;
 import util.IO;
 import util.IUI;
 import util.TextUI;
@@ -91,6 +94,56 @@ public class Game{
             }
         }
     }
+
+        private List<String> saveBoard(){
+        String dataOnTile = "";
+        Tile[][] tiles = board.getTiles();
+        int width = board.getWidth();
+        int height = board.getHeight();
+        List<String> DataForTile = new ArrayList<>();
+        for (int x = 1; x < width ; x++){
+            for (int y = 1; y < height; y++){
+            dataOnTile += tiles[x][y].getPositionX() + ",";
+            dataOnTile += tiles[x][y].getPositionY() + ",";
+          //  dataOnTile += tiles[x][y].getMultiplier() + ",";
+            dataOnTile += tiles[x][y].getLetterChar() + ",";
+                DataForTile.add(dataOnTile);
+                dataOnTile = "";
+            }
+        }
+
+        return DataForTile;
+        }
+    private List<String> savePlayer(){
+        List<String> DataForPlayer = new ArrayList<>();
+
+    }
+
+    private void saveGame(){
+        FileWriter writer = null;
+        //Tile[][] boardTiles = board.getTiles();
+
+        List<String> boardTiles = saveBoard();
+        try {
+            writer = new FileWriter("./data/Data.csv");
+
+            writer.write("posX, posY, char,   \n");
+
+            for (String tileData : boardTiles) {
+                writer.write(tileData+"\n");
+
+            }
+
+            writer.close();
+
+
+        } catch (IOException e) {
+
+
+        }
+    }
+
+
     private void loadSavedGame(){throw new UnsupportedOperationException();}
     
     private void gameLoop(){
@@ -112,6 +165,7 @@ public class Game{
                 case "3":
                     return;
                 case "4":
+                    saveGame();
                     // save game
                     break;
                 default:
