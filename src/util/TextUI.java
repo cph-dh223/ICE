@@ -1,9 +1,11 @@
 package util;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import board.Board;
+import game.Letter;
 
 public class TextUI implements IUI{
 
@@ -56,5 +58,14 @@ public class TextUI implements IUI{
         for (String field : menuFields) {
             System.out.println(field);
         }
+    }
+
+    @Override
+    public void displayHand(List<Letter> letters){
+        String lettersString = "";
+        for (Letter letter : letters) {
+            lettersString += letter.toString() + ", ";
+        }
+        System.out.println(lettersString);
     }
 }
