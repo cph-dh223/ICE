@@ -11,7 +11,7 @@ import java.util.List;
 
 public class GUI extends PApplet implements IUI {
     private static GUI instanse;
-    private String inputText;
+    private String inputText = "";
     private final int sizeOfText = 40;
     private PGraphics textBox;
     private PGraphics menuGraphic;
@@ -100,7 +100,7 @@ public class GUI extends PApplet implements IUI {
         clicked = false;
         String option = "";
         displayMessage(msg);
-        while(!clicked) {
+        while(!clicked && keyCode != ENTER) {
 
             if(keyPressed) {
                 option = getInputTextBox();
@@ -135,24 +135,20 @@ public class GUI extends PApplet implements IUI {
     // Visual TextBox as a replacement for console
     private String getInputTextBox() {
         inputText = "";
-        String tmpText;
-        while(true) {
-            if (keyPressed) {
-                if (keyCode == ENTER) {
-                    tmpText = inputText;
-                    textBox.beginDraw();
-                    textBox.clear();
-                    textBox.endDraw();
-                    return tmpText;
-                }
-            }
-            displayMessage(""); // TODO: Some line has to be here for some reason??
+        while(!keyPressed || keyCode != ENTER) {
+            delay(1);
         }
+        textBox.beginDraw();
+        textBox.clear();
+        textBox.endDraw();
+        redraw();
+        return inputText;
     }
 
 
     private void displayTextBox() {
         textBox.beginDraw();
+        textBox.background(255);
         textBox.fill(0);
         textBox.textSize(30);
         textBox.text(inputText, width/4, height-60);
@@ -216,9 +212,13 @@ public class GUI extends PApplet implements IUI {
     @Override
     public void keyPressed() {
 
-        if (key >= 'A' && key <= 'z' || key >= '0' && key <= '9') {
+        if (key >= 'A' && key <= 'z' || key >= '0' && key <= '9' || key == ',') {
             inputText += key;
         }
+        if(key == BACKSPACE){
+            inputText = inputText.substring(0,inputText.length()-1);
+        }
+
         displayTextBox();
     }
 
@@ -240,7 +240,6 @@ public class GUI extends PApplet implements IUI {
         finalMouseX = mouseX;
         finalMouseY = mouseY;
         clicked = true;
-        System.out.println(getMouseInputPlaceLetter());
     }
 
     public void displayHand(List<Letter> letters) {
