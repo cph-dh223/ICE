@@ -100,16 +100,22 @@ public class GUI extends PApplet implements IUI {
         clicked = false;
         String option = "";
         displayMessage(msg);
-        if(keyPressed) {
-            option = getInputTextBox();
-        }
-        else {
-            try {
-                option = getMouseInputPlaceLetter();
-            } catch (IllegalArgumentException e) {
-                getInput(msg);
+        while(!clicked) {
+
+            if(keyPressed) {
+                option = getInputTextBox();
+                break;
             }
+            else if(mousePressed) {
+                try {
+                    option = getMouseInputPlaceLetter();
+                } catch (IllegalArgumentException e) {
+                    getInput(msg);
+                }
+            }
+            delay(10);
         }
+        clicked = false;
         return option;
 
     }

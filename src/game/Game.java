@@ -78,8 +78,7 @@ public class Game{
         while(true) {
 
             ui.displayMenu(new String[]{"1) Play game", "2) Load game", "3) Quit game"});
-            //String option = ui.getInput("Please type number to choose option");
-            String option = "1";
+            String option = ui.getInput("Please type number to choose option");
             switch(option) {
                 case "1":
                     startGame();
