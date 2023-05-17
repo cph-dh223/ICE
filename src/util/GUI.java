@@ -8,7 +8,6 @@ import board.Tile;
 import java.util.ArrayList;
 
 public class GUI extends PApplet implements IUI {
-    
     private static GUI instanse;
     private String inputText;
     private final int sizeOfText = 40;
@@ -17,10 +16,15 @@ public class GUI extends PApplet implements IUI {
     private PGraphics msgGraphic;
 
     private PImage boardImage;
+    private int finalMouseX;
+    private int finalMouseY;
+    private boolean clicked;
+    private int tileSize = -1;
 
 
     public GUI(){
         instanse = this;
+        clicked = false;
     }
     public static GUI getInstance(){
         return instanse;
@@ -32,7 +36,6 @@ public class GUI extends PApplet implements IUI {
     }
 
     public void setup() {
-        //noLoop();
         textBox = createGraphics(width,height);
         noLoop();
         menuGraphic = createGraphics(width/2,height/2);
@@ -90,7 +93,7 @@ public class GUI extends PApplet implements IUI {
     @Override
     public String getInput(String msg) {
         // Returns key pressed as a String(1, 2, 3 or other...)
-
+        System.out.println(getMouseInputPlaceLetter());
         System.out.println(msg);
         String option = getInputTextBox();
         //String option = String.valueOf(getInputMainMenu());
@@ -198,5 +201,22 @@ public class GUI extends PApplet implements IUI {
             inputText += key;
         }
         displayTextBox();
+    }
+
+    public String getMouseInputPlaceLetter() {
+
+        int x = -1;
+        int y = -1;
+        if(clicked) {
+            x = (finalMouseX - width/2)/tileSize;
+            y = finalMouseY/tileSize;
+        }
+        return ""+x+","+y;
+    }
+
+    public void mouseClicked() {
+        finalMouseX = mouseX;
+        finalMouseY = mouseY;
+        clicked = true;
     }
 }
