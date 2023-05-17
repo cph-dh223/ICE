@@ -22,7 +22,8 @@ public class Game{
     private IUI ui;
 
     public Game() {
-        ui = GUI.getInstance();
+//        ui = GUI.getInstance();
+        ui = new TextUI();
         letters = new ArrayList<Letter>();
         players = new ArrayList<Player>();
         dataSetup();
@@ -77,7 +78,8 @@ public class Game{
         while(true) {
 
             ui.displayMenu(new String[]{"1) Play game", "2) Load game", "3) Quit game"});
-            String option = ui.getInput("Please type number to choose option");
+            //String option = ui.getInput("Please type number to choose option");
+            String option = "1";
             switch(option) {
                 case "1":
                     startGame();
@@ -162,12 +164,8 @@ public class Game{
     }
     
     private void displayPlayerLetters(Player player) {
-        String letters = "";
-        for (Letter letter : player.getLetters()) {
-            //letters += letter.toString() + ", ";
-            letters += letter.getLetter();
-        }
-        ui.displayMessage("This is your letters:" + letters);
+
+        ui.displayHand(player.getLetters());
     }
     
     private void endGame() {
