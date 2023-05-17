@@ -75,7 +75,7 @@ public class Board {
         return height;
     }
     public char getLetter(int x, int y){
-        throw new UnsupportedOperationException();
+        return tiles[x][y].getLetter() == null ? ' ' : tiles[x][y].getLetterChar();
     }
 
     public Tile getTile(int x, int y){
