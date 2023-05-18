@@ -23,6 +23,7 @@ public class GUI extends PApplet implements IUI {
     private boolean clicked;
     private int tileSize = -1;
     private char[] playerLetters;
+    String tmpInput;
 
 
     public GUI(){
@@ -68,8 +69,8 @@ public class GUI extends PApplet implements IUI {
         msgGraphic.textSize(sizeOfText);
         msgGraphic.text(msg, 0,50);
         msgGraphic.endDraw();
-
         redraw();
+        //delay(500);
         // noLoop
     }
 
@@ -103,6 +104,7 @@ public class GUI extends PApplet implements IUI {
                 option = getInputTextBox();
                 break;
             }
+            /*
             else if(mousePressed) {
                 try {
                     option = getMouseInputPostion();
@@ -111,10 +113,12 @@ public class GUI extends PApplet implements IUI {
                     getInput(msg);
                 }
             }
+
+             */
             delay(10);
         }
         clicked = false;
-        System.out.println(option);
+        System.out.println("This is the option: " + option);
         return option;
     }
 
@@ -136,11 +140,13 @@ public class GUI extends PApplet implements IUI {
         while(!keyPressed || keyCode != ENTER) {
             delay(1);
         }
+        tmpInput = inputText;
+        inputText = "";
         textBox.beginDraw();
         textBox.background(255);
         textBox.endDraw();
         redraw();
-        return inputText;
+        return tmpInput;
     }
 
 
@@ -217,7 +223,6 @@ public class GUI extends PApplet implements IUI {
                 inputText = inputText.substring(0,inputText.length()-1);
             }
         }
-
         displayTextBox();
     }
 
@@ -285,6 +290,9 @@ public class GUI extends PApplet implements IUI {
         }
         handGraphic.endDraw();
         redraw();
+    }
 
+    public static boolean isAlphaNumeric(String s) {
+        return s != null && s.matches("^[a-zA-Z0-9]*$");
     }
 }
