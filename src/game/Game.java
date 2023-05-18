@@ -140,20 +140,17 @@ public class Game{
                     placeLetters();
                     return;
                 }
-                System.out.println("Size of the list of letters used: " + toBePlacedLetters.size());
-                board.updateBoard();
-                System.out.println("Size of the list of letters used: " + toBePlacedLetters.size());
-                currentPlayer.removeLetters(toBePlacedLetters);
-                System.out.println("Size of the list of letters used: " + toBePlacedLetters.size());
-                currentPlayer.addScore(playerScore);
-                System.out.println("Word points: " + playerScore);
-                System.out.println("Size of the list of letters used: " + toBePlacedLetters.size());
-                addRandomLettersToPlayer(toBePlacedLetters.size(), currentPlayer);
-                System.out.println("Size of the list of letters used: " + toBePlacedLetters.size());
 
+                board.updateBoard();
+                currentPlayer.removeLetters(toBePlacedLetters);
+                currentPlayer.addScore(playerScore);
+                System.out.println("You got: " + playerScore + " points");
+                addRandomLettersToPlayer(toBePlacedLetters.size(), currentPlayer);
                 displayPlayerLetters(currentPlayer);
                 return;
             }
+
+
             String[] letter = input.replaceAll(" *", "").split(",");
             board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(letter[2].charAt(0)));
             // Tilføjet af mig
@@ -166,7 +163,8 @@ public class Game{
     
     
     private void extangeLetters() {
-        String input = ui.getInput("Choose what letters to replace");
+        String input = ui.getInput("Choose what letters to replace in this format: Letter, letter, etc. Ex: L,A,A,B");
+
         List<Letter> lettersToReplace = new ArrayList<>();
 
 
