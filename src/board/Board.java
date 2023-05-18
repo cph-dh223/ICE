@@ -36,21 +36,21 @@ public class Board {
 
 
     private void initTiles() {
-        //Letter aLetter = new Letter('#', 0);
+        Letter aLetter = new Letter('_', 0);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                tiles[i][j] = new Tile(i, j, Multiplier.NORMAL);
+                tiles[i][j] = new Tile(i, j, Multiplier.NORMAL, aLetter);
                 if(i == 0 && j == 0 || i == 7 && j == 0 || i == 14 && j == 0 || i == 0 && j == 7 || i == 14 && j == 7 || i == 0 && j == 14 || i == 7 && j == 14 || i == 14 && j == 14) {
-                    tiles[i][j] = new Tile(i, j, Multiplier.TRIPLE_WORD);
+                    tiles[i][j] = new Tile(i, j, Multiplier.TRIPLE_WORD, aLetter);
                 }
                     else if(i == 3 && j == 0 || i == 11 && j == 0 || i == 6 && j == 2 || i == 8 && j == 2 || i == 0 && j == 3 || i == 7 && j == 3 || i == 14 && j == 3 || i == 2 && j == 6 || i == 6 && j == 6 || i == 8 && j == 6 || i == 12 && j == 6 || i == 3 && j == 7 || i == 11 && j == 7 || i == 2 && j == 8 || i == 6 && j == 8 || i == 8 && j == 8 || i == 12 && j == 8 || i == 0 && j == 11 || i == 7 && j == 11 || i == 14 && j == 11 || i == 6 && j == 12 || i == 8 && j == 12 || i == 3 && j == 14 || i == 11 && j == 14) {
-                        tiles[i][j] = new Tile(i, j, Multiplier.DOUBLE_LETTER);
+                        tiles[i][j] = new Tile(i, j, Multiplier.DOUBLE_LETTER, aLetter);
                     }
                     else if(i == 1 && j == 1 || i == 13 && j == 1 || i == 2 && j == 2 || i == 12 && j == 2 || i == 3 && j == 3 || i == 11 && j == 3 || i == 4 && j == 4 || i == 10 && j == 4 || i == 7 && j == 7 || i == 4 && j == 10 || i == 10 && j == 10 || i == 3 && j == 11 || i == 11 && j == 11 || i == 2 && j == 12 || i == 12 && j == 12 || i == 1 && j == 13 || i == 13 && j == 13){
-                    tiles[i][j] = new Tile(i, j, Multiplier.DOUBLE_WORD);
+                    tiles[i][j] = new Tile(i, j, Multiplier.DOUBLE_WORD, aLetter);
                 }
                     else if(i == 5 && j == 1 || i == 9 && j == 1 || i == 1 && j == 5 || i == 5 && j == 5 || i == 9 && j == 5 || i == 13 && j == 5 || i == 1 && j == 9 || i == 5 && j == 9 || i == 9 && j == 9 || i == 13 && j == 9 || i == 5 && j == 13 || i == 9 && j == 13){
-                    tiles[i][j] = new Tile(i, j, Multiplier.TRIPLE_LETTER);
+                    tiles[i][j] = new Tile(i, j, Multiplier.TRIPLE_LETTER, aLetter);
                 }
             }
         }
@@ -263,15 +263,15 @@ public class Board {
                     && y < this.height-1){
 
                 //1.11) if there IS a tile WITH a LETTER ABOVE or BENEATH the toBePlaced tile...
-                if (tiles[x][y-1].getLetterChar() != '#'
-                        || tiles[x][y+1].getLetterChar()!= '#') {
+                if (tiles[x][y-1].getLetterChar() != '_'
+                        || tiles[x][y+1].getLetterChar()!= '_') {
                     // ...then the direction is HORIZONTAL.
                     return Direction.VERTICAL;
                 }
 
                 //1.12) if there IS a tile WITH A LETTER on the RIGHT OR LEFT side of the toBePlaced tile...
-                else if (tiles[x-1][y].getLetterChar() != '#'
-                        || tiles[x+1][y].getLetterChar() != '#') {
+                else if (tiles[x-1][y].getLetterChar() != '_'
+                        || tiles[x+1][y].getLetterChar() != '_') {
                     // ...then the direction is HORIZONTAL.
                     return Direction.HORISONTAL;
 
@@ -290,15 +290,15 @@ public class Board {
                     && y < this.height-1){
 
                 //1.21) if there IS a tile WITH a LETTER ABOVE or BENEATH the toBePlaced tile
-                if (tiles[x][y-1].getLetterChar() != '#'
-                        || tiles[x][y+1].getLetterChar() != '#')
+                if (tiles[x][y-1].getLetterChar() != '_'
+                        || tiles[x][y+1].getLetterChar() != '_')
                 {
                     // ...then the direction is VERTICAL.
                     return Direction.VERTICAL;
                 }
 
                 //1.22) if there IS a tile WITH A LETTER on the RIGHT side of the toBePlaced tile...
-                else if (tiles[x+1][y].getLetterChar() != '#') {
+                else if (tiles[x+1][y].getLetterChar() != '_') {
                     // ...then the direction is HORIZONTAL.
                     return Direction.HORISONTAL;
 
@@ -321,14 +321,14 @@ public class Board {
 
                 //1.31) if there IS a tile WITH a LETTER ABOVE or BENEATH the toBePlaced tile
                 //OBS!!! This if statement is a copy of one above
-                if (tiles[x][y-1].getLetterChar() != '#'
-                        || tiles[x][y+1].getLetterChar() != '#') {
+                if (tiles[x][y-1].getLetterChar() != '_'
+                        || tiles[x][y+1].getLetterChar() != '_') {
                     // ...then the direction is VERTICAL.
                     return Direction.VERTICAL;
                 }
 
                 //1.32) if there IS a tile WITH A LETTER on the LEFT side of the toBePlaced tile...
-                else if (tiles[x-1][y].getLetterChar() != '#') {
+                else if (tiles[x-1][y].getLetterChar() != '_') {
                     // ...then the direction is HORIZONTAL.
                     return Direction.HORISONTAL;
 
@@ -349,14 +349,14 @@ public class Board {
                     && y== this.height-1){
 
                 //1.41) if there IS a tile WITH a LETTER on the RIGHT or LEFT side of the toBePlaced tile
-                if ((tiles[x-1][y].getLetterChar() != '#'
-                        || tiles[x+1][y].getLetterChar() != '#')) {
+                if ((tiles[x-1][y].getLetterChar() != '_'
+                        || tiles[x+1][y].getLetterChar() != '_')) {
                     // ...then the direction is HORIZONTAL.
                     return Direction.HORISONTAL;
                 }
 
                 //1.42) if there IS a tile WITH A LETTER ABOVE the toBePlaced tile...
-                else if (tiles[x][y-1].getLetterChar() != '#') {
+                else if (tiles[x][y-1].getLetterChar() != '_') {
                     // ...then the direction is VERTICAL.
                     return Direction.VERTICAL;
 
@@ -380,14 +380,14 @@ public class Board {
 
                 // 1.51) if there IS a tile WITH a LETTER on the RIGHT or LEFT side of the toBePlaced tile
                 // OBS!!! This is a copy of an if statement above
-                if (tiles[x-1][y].getLetterChar() != '#'
-                        || tiles[x+1][y].getLetterChar() != '#') {
+                if (tiles[x-1][y].getLetterChar() != '_'
+                        || tiles[x+1][y].getLetterChar() != '_') {
                     // ...then the direction is HORIZONTAL.
                     return Direction.HORISONTAL;
                 }
 
                 //1.52) if there IS a tile WITH A LETTER BENEATH the toBePlaced tile...
-                else if (tiles[x][y+1].getLetterChar() != '#') {
+                else if (tiles[x][y+1].getLetterChar() != '_') {
                     // ...then the direction is VERTICAL.
                     return Direction.VERTICAL;
 
@@ -408,13 +408,13 @@ public class Board {
             else if (tiles[x][y] == tiles[0][0]){
 
                 // 1.61) if there IS a tile WITH a LETTER on the RIGHT side of the toBePlaced tile
-                if ((tiles[x+1][y].getLetterChar() != '#')) {
+                if ((tiles[x+1][y].getLetterChar() != '_')) {
                     // ...then the direction is HORIZONTAL.
                     return Direction.HORISONTAL;
                 }
 
                 //1.62 If there IS a tile WITH A LETTER BENEATH the toBePlaced tile...
-                else if (tiles[x][y+1].getLetterChar() != '#') {
+                else if (tiles[x][y+1].getLetterChar() != '_') {
                     // ...then the direction is VERTICAL.
                     return Direction.VERTICAL;
 
@@ -435,14 +435,14 @@ public class Board {
             else if (tiles[x][y] == tiles[this.width-1][0]){
 
                 // 1.71) if there IS a tile WITH a LETTER on the LEFT side of the toBePlaced tile
-                if (tiles[x-1][y].getLetterChar() != '#') {
+                if (tiles[x-1][y].getLetterChar() != '_') {
                     // ...then the direction is HORIZONTAL.
                     return Direction.HORISONTAL;
                 }
 
                 // 1.72 If there IS a tile WITH A LETTER BENEATH the toBePlaced tile...
                 // OBS!!! This is a copy of an if statement above
-                else if (tiles[x][y+1].getLetterChar() != '#') {
+                else if (tiles[x][y+1].getLetterChar() != '_') {
                     // ...then the direction is VERTICAL.
                     return Direction.VERTICAL;
 
@@ -463,14 +463,14 @@ public class Board {
             else if (tiles[x][y] == tiles[0][this.height-1]){
 
                 // 1.81) if there IS a tile WITH a LETTER on the RIGHT side of the toBePlaced tile
-                if (tiles[x+1][y].getLetterChar() != '#')
+                if (tiles[x+1][y].getLetterChar() != '_')
                 {
                     // ...then the direction is HORIZONTAL.
                     return Direction.HORISONTAL;
                 }
 
                 // 1.82 If there IS a tile WITH A LETTER ABOVE the toBePlaced tile...
-                else if (tiles[x][y-1].getLetterChar() != '#') {
+                else if (tiles[x][y-1].getLetterChar() != '_') {
                     // ...then the direction is VERTICAL.
                     return Direction.VERTICAL;
 
@@ -491,7 +491,7 @@ public class Board {
             else if (tiles[x][y] == tiles[this.width-1][this.height-1]){
 
                 // 1.91) if there IS a tile WITH a LETTER on the LEFT side of the toBePlaced tile
-                if (tiles[x-1][y].getLetterChar() != '#')
+                if (tiles[x-1][y].getLetterChar() != '_')
                 {
                     // ...then the direction is HORIZONTAL.
                     return Direction.HORISONTAL;
@@ -500,7 +500,7 @@ public class Board {
                 // 1.92 If there IS a tile WITH A LETTER ABOVE the toBePlaced tile...
                 // OBS!!! This is a copy of an if statement above
                 else if (tiles[x][y-1].getLetterChar()
-                        != '#') {
+                        != '_') {
                     // ...then the direction is VERTICAL.
                     return Direction.VERTICAL;
 
@@ -586,13 +586,13 @@ public class Board {
             // only to check in the direction towards center of board if the letter is placed
             // at the edge of the board (hence the  x>0  in the first line, the  x < this.width-1
             // in the second line and so forth)
-            if ( (x > 0 && tempTiles[x-1][y].getLetterChar() != '#')
+            if ( (x > 0 && tempTiles[x-1][y].getLetterChar() != '_')
                     ||
-                    (x < this.width-1 && tempTiles[x+1][y].getLetterChar() != '#')
+                    (x < this.width-1 && tempTiles[x+1][y].getLetterChar() != '_')
                     ||
-                    (y > 0 && tempTiles[x][y-1].getLetterChar() != '#')
+                    (y > 0 && tempTiles[x][y-1].getLetterChar() != '_')
                     ||
-                    (y < this.height-1 && tempTiles[x][y+1].getLetterChar() != '#')
+                    (y < this.height-1 && tempTiles[x][y+1].getLetterChar() != '_')
             ) {
                 // SKAL der være noget her?!?!
                 int notImportant = 0;
@@ -624,13 +624,13 @@ public class Board {
 
             // Checking if the letter is connected to any of the previously connected placed letters
             if (
-                    (x > 0 && tiles[x-1][y].getLetterChar() != '#')
+                    (x > 0 && tiles[x-1][y].getLetterChar() != '_')
                             ||
-                            (x < this.width-1 && tiles[x+1][y].getLetterChar() != '#')
+                            (x < this.width-1 && tiles[x+1][y].getLetterChar() != '_')
                             ||
-                            (y > 0 && tiles[x][y-1].getLetterChar() != '#')
+                            (y > 0 && tiles[x][y-1].getLetterChar() != '_')
                             ||
-                            (y < this.height-1 && tiles[x][y+1].getLetterChar() != '#')
+                            (y < this.height-1 && tiles[x][y+1].getLetterChar() != '_')
             ) {
 
                 lettersConnectedToOldLetters += 1;
@@ -666,7 +666,7 @@ public class Board {
         if (direction == Direction.VERTICAL) {
 
             // While loop making the y-value going back to the posY right before the first letter of word
-            while (y>=0 && this.tempTiles[x][y].getLetterChar() != '#') {
+            while (y>=0 && this.tempTiles[x][y].getLetterChar() != '_') {
                 y -= 1;
             }
             // Going forward to the first letter of the word
@@ -679,7 +679,7 @@ public class Board {
         } else {
 
             // While loop making the x-value going back to the posX right before the first letter of word
-            while (x>=0 && this.tempTiles[x][y].getLetterChar() != '#') {
+            while (x>=0 && this.tempTiles[x][y].getLetterChar() != '_') {
                 x -= 1;
             }
             // Going forward to the first letter of the word
@@ -704,7 +704,7 @@ public class Board {
 
             // While loop going through the word letter by letter (by counting up the y-value -
             // cf. direction is VERTICAL)
-            while (y>=0 && y<=this.height-1 && tempTiles[x][y].getLetterChar() != '#') {
+            while (y>=0 && y<=this.height-1 && tempTiles[x][y].getLetterChar() != '_') {
 
                 // THIS COULD BE A METHOD BY ITSELF ################################################
                 boolean justPlaced = false;
@@ -762,7 +762,7 @@ public class Board {
 
             // While loop going through the word letter by letter (by counting up the x-value -
             // cf. direction is HORIZONTAL)
-            while (x>=0 && x<=this.width-1 && tempTiles[x][y].getLetterChar() != '#') {
+            while (x>=0 && x<=this.width-1 && tempTiles[x][y].getLetterChar() != '_') {
 
                 boolean justPlaced = false;
 
@@ -819,10 +819,10 @@ public class Board {
 
             if (justPlaced == true){
 
-                // (x-1 == 0 && tempTiles[x+1][y].getLetterChar() !='#') || (x+1 ==0 && tempTiles[x-1][y].getLetterChar() !='#')
+                // (x-1 == 0 && tempTiles[x+1][y].getLetterChar() !='_') || (x+1 ==0 && tempTiles[x-1][y].getLetterChar() !='_')
 
                 // If letter getting checked is at the LEFT OR RIGHT edge of the board
-                if ((x == 0 && tempTiles[x+1][y].getLetterChar() !='#') || (x == this.width-1 && tempTiles[x-1][y].getLetterChar() !='#')){
+                if ((x == 0 && tempTiles[x+1][y].getLetterChar() !='_') || (x == this.width-1 && tempTiles[x-1][y].getLetterChar() !='_')){
 
                     tempFlaggedLettersCounter +=1;
                     List<Integer> posXAndposY = new ArrayList<>();
@@ -836,7 +836,7 @@ public class Board {
 
                 // If the letter getting checked is NOT at the edge of the board AND there is either a letter on the LEFT
                 // or on the RIGHT
-                else if ((x > 0 && (tempTiles[x-1][y].getLetterChar() != '#')) || (x < this.width-1 && tempTiles[x+1][y].getLetterChar() !='#')) {
+                else if ((x > 0 && (tempTiles[x-1][y].getLetterChar() != '_')) || (x < this.width-1 && tempTiles[x+1][y].getLetterChar() !='_')) {
 
                     tempFlaggedLettersCounter +=1;
                     List<Integer> posXAndposY = new ArrayList<>();
@@ -853,7 +853,7 @@ public class Board {
             if (justPlaced == true){
 
                 // If letter getting checked is at the TOP or BOTTOM edge of the board
-                if ( (y == 0 && tempTiles[x][y+1].getLetterChar() !='#') || (y == this.height-1 && tempTiles[x][y-1].getLetterChar() !='#')) {
+                if ( (y == 0 && tempTiles[x][y+1].getLetterChar() !='_') || (y == this.height-1 && tempTiles[x][y-1].getLetterChar() !='_')) {
 
                     tempFlaggedLettersCounter +=1;
 
@@ -864,7 +864,7 @@ public class Board {
                     tempLettersWithWordsToGoThrough.put(tempFlaggedLettersCounter, posXAndposY);
                 }
                 // If letter getting checked is NOT at the edge of the board
-                else if (y > 0 && (tempTiles[x][y-1].getLetterChar() != '#' || y < this.height-1 && tempTiles[x][y+1].getLetterChar() !='#')) {
+                else if (y > 0 && (tempTiles[x][y-1].getLetterChar() != '_' || y < this.height-1 && tempTiles[x][y+1].getLetterChar() !='_')) {
 
                     tempFlaggedLettersCounter +=1;
                     List<Integer> posXAndposY = new ArrayList<>();
