@@ -79,9 +79,6 @@ public class GUI extends PApplet implements IUI {
      */
     @Override
     public void displayMenu(String[] menuFields) {
-        if(msgGraphic.image != null){
-            //msgGraphic.clear();
-        }
         menuGraphic.beginDraw();
         menuGraphic.background(255);
         menuGraphic.fill(0);

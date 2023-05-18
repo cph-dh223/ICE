@@ -46,8 +46,7 @@ class PlayerTest {
 
     }
     @Test
-    void
-    removeLetters() {
+    void  removeLetters() {
         Letter expected = null;
         ArrayList<Letter> addLetters = new ArrayList<>();
         addLetters.add(new Letter('b', 2));

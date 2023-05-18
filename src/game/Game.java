@@ -42,7 +42,7 @@ public class Game{
             ui.displayMessage("The dictionary file was not found please look in the data folder and make shure there is a \"Dictionary.txt\" file");
         }
         try {
-            lettersFromFile = IO.getDataFromTxt("./data/Letters.csv");
+            lettersFromFile = IO.getDataFromTxt("./data/LettersWOblank.csv");
         } catch (FileNotFoundException e) {
             ui.displayMessage("The file with letters and their ammount and score was not found please look in the data folder and make shure there is a \"Letters.csv\" file");
         }
@@ -132,13 +132,17 @@ public class Game{
         while(true){
             String input = ui.getInput("Next letter or confirm selection");
             if (input.equals("")) {
-                int playerScore = board.checkWord();
+                int playerScore = board.checkSubmittedLetters();
                 if (playerScore == -1) {
                     ui.displayMessage("you did not place a valid word please try again");
                     placeLetters();
                 }
+                else {
+                    board.updateBoard();
+                }
                 currentPlayer.removeLetters(toBePlacedLetters);
                 currentPlayer.addScore(playerScore);
+                System.out.println("Word points: " + playerScore);
                 addRandomLettersToPlayer(toBePlacedLetters.size(), currentPlayer);
                 displayPlayerLetters(currentPlayer);
                 return;
