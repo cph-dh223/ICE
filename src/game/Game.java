@@ -40,7 +40,7 @@ public class Game{
             ui.displayMessage("The dictionary file was not found please look in the data folder and make shure there is a \"Dictionary.txt\" file");
         }
         try {
-            lettersFromFile = IO.getDataFromTxt("./data/Letters.csv");
+            lettersFromFile = IO.getDataFromTxt("./data/LettersWOblank.csv");
         } catch (FileNotFoundException e) {
             ui.displayMessage("The file with letters and their ammount and score was not found please look in the data folder and make shure there is a \"Letters.csv\" file");
         }
