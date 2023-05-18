@@ -6,7 +6,6 @@ import board.Board;
 import board.Multiplier;
 import board.Tile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GUI extends PApplet implements IUI {
@@ -104,11 +103,12 @@ public class GUI extends PApplet implements IUI {
 
             if(keyPressed) {
                 option = getInputTextBox();
+                option += getInputMouseLetter();
                 break;
             }
             else if(mousePressed) {
                 try {
-                    option = getMouseInputPlaceLetter();
+                    option = getMouseInputPostion();
                 } catch (IllegalArgumentException e) {
                     getInput(msg);
                 }
@@ -222,7 +222,7 @@ public class GUI extends PApplet implements IUI {
         displayTextBox();
     }
 
-    public String getMouseInputPlaceLetter() throws IllegalArgumentException{
+    public String getMouseInputPostion() throws IllegalArgumentException{
         int x = -1;
         int y = -1;
 
@@ -234,6 +234,18 @@ public class GUI extends PApplet implements IUI {
             }
         }
         return ""+x+","+y;
+    }
+    public String getInputMouseLetter() throws IllegalArgumentException{
+        int x = -1;
+        int y = -1;
+
+        if(clicked) {
+            x = (int)map(finalMouseX, width-(sizeOfText/2)-(sizeOfText*7), width-sizeOfText/2, 0, 7);
+            if (x < 0 || x > 7 || y < width/2 || y > sizeOfText) {
+                throw new IllegalArgumentException();
+            }
+        }
+        return x+","+y+",";
     }
 
     public void mouseClicked() {
