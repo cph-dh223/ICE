@@ -196,6 +196,13 @@ public class GUI extends PApplet implements IUI {
                 if(board.getTile(i, j).getLetter() != null) {
                     boardGraphic.fill(0);
                     char tileChar = board.getTile(i, j).getLetterChar();
+                    // DISPLAY ADDED LETTERS
+                    for(Tile tile : board.getToBePlaced()) {
+                        if (tile.getPositionX() == i && tile.getPositionY() == j) {
+                            boardGraphic.fill(200,0,0);
+                            tileChar = tile.getLetterChar();
+                        }
+                    }
                     boardGraphic.text(tileChar, i * tileSize + tileSize/2 + strokeWeight,j*tileSize + tileSize/2 - strokeWeight);
                     boardGraphic.stroke(0);
                     boardGraphic.fill(255);
