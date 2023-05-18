@@ -27,14 +27,14 @@ public class TextUI implements IUI{
                     continue;
                 }
                 if(i == -1 || i == board.getWidth()){
-                    System.out.print(" "+i+" ");
+                    //System.out.print(" "+j+" ");
                     continue;
                 }
                 if (j == -1 || j == board.getHeight()) {
-                    System.out.print(" "+j+" ");
+                    //System.out.print(" "+i+" ");
                     continue;
                 }
-                char letter = board.getLetter(i, j);
+                char letter = board.getLetter(j, i);
                 
                 System.out.print(" " + letter + " ");
             }
@@ -62,10 +62,13 @@ public class TextUI implements IUI{
 
     @Override
     public void displayHand(String playerName, List<Letter> letters){
+
         String lettersString = "";
+
         for (Letter letter : letters) {
             lettersString += letter.toString() + ", ";
         }
+
         System.out.println(lettersString);
     }
 }

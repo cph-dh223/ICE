@@ -113,13 +113,14 @@ public class Board {
 
 
             if (firstWordInCenter == false){
-
+                wordSubmittedCounter = 0;
                 return -1;
             }
 
             boolean areFirstWordConnected = areLettersConnectedToAnyLetter();
 
             if(areFirstWordConnected == false) {
+                wordSubmittedCounter = 0;
                 return -1;
             }
         }
@@ -197,6 +198,9 @@ public class Board {
             // If goThroughWord() returns -1 checkSubmittedLetters() (this method) returns -1
             // Clearing all temp-fields and toBePlaced field if this method returns something
             if (pointsOfWord == -1) {
+                if (wordSubmittedCounter == 1) {
+                    wordSubmittedCounter = 0;
+                }
                 tempFlaggedLettersCounter = 1;
                 tempDoubleWordCounter = 0;
                 tempWordToCompare.clear();
@@ -214,7 +218,13 @@ public class Board {
             wordCounter ++;
         }
 
+        /*
         // Clearing all temp-fields and toBePlaced field if this method returns something
+        if (wordSubmittedCounter == 1) {
+            wordSubmittedCounter = 0;
+        }
+
+         */
         tempFlaggedLettersCounter = 1;
         tempDoubleWordCounter = 0;
         tempWordToCompare.clear();
@@ -254,7 +264,7 @@ public class Board {
 
                 //1.11) if there IS a tile WITH a LETTER ABOVE or BENEATH the toBePlaced tile...
                 if (tiles[x][y-1].getLetterChar() != '#'
-                        || tiles[x][y+1].getLetterChar() != '#') {
+                        || tiles[x][y+1].getLetterChar()!= '#') {
                     // ...then the direction is HORIZONTAL.
                     return Direction.VERTICAL;
                 }

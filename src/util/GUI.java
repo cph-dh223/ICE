@@ -34,7 +34,8 @@ public class GUI extends PApplet implements IUI {
     }
 
     public void settings(){
-        fullScreen();
+        size(1280,720);
+        //fullScreen();
 
     }
 
