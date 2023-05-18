@@ -103,7 +103,7 @@ public class GUI extends PApplet implements IUI {
 
             if(keyPressed) {
                 option = getInputTextBox();
-                option += getInputMouseLetter();
+                //option += getInputMouseLetter();
                 break;
             }
             else if(mousePressed) {
