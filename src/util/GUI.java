@@ -11,7 +11,7 @@ import java.util.List;
 public class GUI extends PApplet implements IUI {
     private static GUI instanse;
     private String inputText = "";
-    private final int sizeOfText = 40;
+    private final int sizeOfText = 35;
     private PGraphics textBox;
     private PGraphics menuGraphic;
     private PGraphics msgGraphic;
@@ -24,6 +24,8 @@ public class GUI extends PApplet implements IUI {
     private int tileSize = -1;
     private char[] playerLetters;
     String tmpInput;
+    boolean enter;
+    boolean waitingForKey;
 
 
     public GUI(){
@@ -70,7 +72,22 @@ public class GUI extends PApplet implements IUI {
         msgGraphic.text(msg, 0,50);
         msgGraphic.endDraw();
         redraw();
-        //delay(500);
+        delay(3000);
+        waitingForKey = true;
+        // noLoop
+    }
+
+    public void displayMessageNoTypeDelay(String msg) {
+        // Visually show message on screen
+        msgGraphic.beginDraw();
+        msgGraphic.background(255);
+        msgGraphic.fill(0);
+        msgGraphic.textSize(sizeOfText);
+        msgGraphic.text(msg, 0,50);
+        msgGraphic.endDraw();
+        redraw();
+        //delay(0);
+        waitingForKey = true;
         // noLoop
     }
 
@@ -96,30 +113,23 @@ public class GUI extends PApplet implements IUI {
 
     @Override
     public String getInput(String msg) {
-        clicked = false;
-        String option = "";
-        displayMessage(msg);
-        while(!clicked && keyCode != ENTER) {
-            if(keyPressed) {
-                option = getInputTextBox();
-                break;
-            }
-            /*
-            else if(mousePressed) {
-                try {
-                    option = getMouseInputPostion();
-                    option += getInputMouseLetter();
-                } catch (IllegalArgumentException e) {
-                    getInput(msg);
-                }
-            }
-
-             */
-            delay(10);
+        String outputText;
+        waitingForKey = false;
+        displayMessageNoTypeDelay(msg);
+        enter = false;
+        inputText = "";
+        waitingForKey = true;
+        while(!enter) {
+            delay(0);
         }
-        clicked = false;
-        System.out.println("This is the option: " + option);
-        return option;
+        waitingForKey = false;
+        textBox.beginDraw();
+        textBox.background(255);
+        textBox.endDraw();
+        redraw();
+        outputText = inputText;
+        inputText = "";
+        return outputText;
     }
 
     private String getInputCoordinates() {
@@ -133,22 +143,6 @@ public class GUI extends PApplet implements IUI {
             }
         }
     }
-
-    // Visual TextBox as a replacement for console
-    private String getInputTextBox() {
-        inputText = "";
-        while(!keyPressed || keyCode != ENTER) {
-            delay(1);
-        }
-        tmpInput = inputText;
-        inputText = "";
-        textBox.beginDraw();
-        textBox.background(255);
-        textBox.endDraw();
-        redraw();
-        return tmpInput;
-    }
-
 
     private void displayTextBox() {
         textBox.beginDraw();
@@ -213,17 +207,21 @@ public class GUI extends PApplet implements IUI {
         redraw();
     }
 
-    @Override
     public void keyPressed() {
-        if (key >= 'A' && key <= 'z' || key >= '0' && key <= '9' || key == ',') {
-            inputText += key;
-        }
-        if(key == BACKSPACE){
-            if(inputText.length() > 0) {
-                inputText = inputText.substring(0,inputText.length()-1);
+        if(waitingForKey) {
+            if (key >= 'A' && key <= 'z' || key >= '0' && key <= '9' || key == ',') {
+                inputText += key;
+                displayTextBox();
+            } else if (key == BACKSPACE) {
+                if (inputText.length() > 0) {
+                    inputText = inputText.substring(0, inputText.length() - 1);
+                }
+                displayTextBox();
+            } else if (key == ENTER && inputText.length() > 0) {
+                enter = true;
             }
         }
-        displayTextBox();
+
     }
 
     public String getMouseInputPostion() throws IllegalArgumentException{
