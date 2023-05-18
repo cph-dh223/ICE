@@ -69,13 +69,17 @@ public class Board {
 
     }
     public int getWidth()    {
-        throw new UnsupportedOperationException();
+        return width;
     }
     public int getHeight()    {
-        throw new UnsupportedOperationException();
+        return height;
     }
     public char getLetter(int x, int y){
-        throw new UnsupportedOperationException();
+        return tiles[x][y].getLetter() == null ? ' ' : tiles[x][y].getLetterChar();
+    }
+
+    public Tile getTile(int x, int y){
+        return tiles[x][y];
     }
 }
 
