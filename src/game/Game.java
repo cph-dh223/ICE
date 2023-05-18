@@ -95,52 +95,15 @@ public class Game{
         }
     }
 
-        private List<String> saveBoard(){
-        String dataOnTile = "";
-        Tile[][] tiles = board.getTiles();
-        int width = board.getWidth();
-        int height = board.getHeight();
-        List<String> DataForTile = new ArrayList<>();
-        for (int x = 1; x < width ; x++){
-            for (int y = 1; y < height; y++){
-            dataOnTile += tiles[x][y].getPositionX() + ",";
-            dataOnTile += tiles[x][y].getPositionY() + ",";
-          //  dataOnTile += tiles[x][y].getMultiplier() + ",";
-            dataOnTile += tiles[x][y].getLetterChar() + ",";
-                DataForTile.add(dataOnTile);
-                dataOnTile = "";
-            }
-        }
 
-        return DataForTile;
-        }
-    private List<String> savePlayer(){
-        List<String> DataForPlayer = new ArrayList<>();
-
-    }
 
     private void saveGame(){
-        FileWriter writer = null;
-        //Tile[][] boardTiles = board.getTiles();
 
-        List<String> boardTiles = saveBoard();
-        try {
-            writer = new FileWriter("./data/Data.csv");
-
-            writer.write("posX, posY, char,   \n");
-
-            for (String tileData : boardTiles) {
-                writer.write(tileData+"\n");
-
-            }
-
-            writer.close();
+      IO.
 
 
-        } catch (IOException e) {
 
 
-        }
     }
 
 
