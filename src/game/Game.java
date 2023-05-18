@@ -168,6 +168,8 @@ public class Game{
     private void extangeLetters() {
         String input = ui.getInput("Choose what letters to replace");
         List<Letter> lettersToReplace = new ArrayList<>();
+
+
         char[] charsToReplase = input.replaceAll(" *,*", "").toCharArray();
         for(char c : charsToReplase){
             lettersToReplace.add(currentPlayer.getLetter(c));

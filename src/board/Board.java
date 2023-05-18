@@ -36,21 +36,21 @@ public class Board {
 
 
     private void initTiles() {
-        Letter aLetter = new Letter('#', 0);
+        //Letter aLetter = new Letter('#', 0);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                tiles[i][j] = new Tile(i, j, Multiplier.NORMAL, aLetter);
+                tiles[i][j] = new Tile(i, j, Multiplier.NORMAL);
                 if(i == 0 && j == 0 || i == 7 && j == 0 || i == 14 && j == 0 || i == 0 && j == 7 || i == 14 && j == 7 || i == 0 && j == 14 || i == 7 && j == 14 || i == 14 && j == 14) {
-                    tiles[i][j] = new Tile(i, j, Multiplier.TRIPLE_WORD, aLetter);
+                    tiles[i][j] = new Tile(i, j, Multiplier.TRIPLE_WORD);
                 }
                     else if(i == 3 && j == 0 || i == 11 && j == 0 || i == 6 && j == 2 || i == 8 && j == 2 || i == 0 && j == 3 || i == 7 && j == 3 || i == 14 && j == 3 || i == 2 && j == 6 || i == 6 && j == 6 || i == 8 && j == 6 || i == 12 && j == 6 || i == 3 && j == 7 || i == 11 && j == 7 || i == 2 && j == 8 || i == 6 && j == 8 || i == 8 && j == 8 || i == 12 && j == 8 || i == 0 && j == 11 || i == 7 && j == 11 || i == 14 && j == 11 || i == 6 && j == 12 || i == 8 && j == 12 || i == 3 && j == 14 || i == 11 && j == 14) {
-                        tiles[i][j] = new Tile(i, j, Multiplier.DOUBLE_LETTER, aLetter);
+                        tiles[i][j] = new Tile(i, j, Multiplier.DOUBLE_LETTER);
                     }
                     else if(i == 1 && j == 1 || i == 13 && j == 1 || i == 2 && j == 2 || i == 12 && j == 2 || i == 3 && j == 3 || i == 11 && j == 3 || i == 4 && j == 4 || i == 10 && j == 4 || i == 7 && j == 7 || i == 4 && j == 10 || i == 10 && j == 10 || i == 3 && j == 11 || i == 11 && j == 11 || i == 2 && j == 12 || i == 12 && j == 12 || i == 1 && j == 13 || i == 13 && j == 13){
-                    tiles[i][j] = new Tile(i, j, Multiplier.DOUBLE_WORD, aLetter);
+                    tiles[i][j] = new Tile(i, j, Multiplier.DOUBLE_WORD);
                 }
                     else if(i == 5 && j == 1 || i == 9 && j == 1 || i == 1 && j == 5 || i == 5 && j == 5 || i == 9 && j == 5 || i == 13 && j == 5 || i == 1 && j == 9 || i == 5 && j == 9 || i == 9 && j == 9 || i == 13 && j == 9 || i == 5 && j == 13 || i == 9 && j == 13){
-                    tiles[i][j] = new Tile(i, j, Multiplier.TRIPLE_LETTER, aLetter);
+                    tiles[i][j] = new Tile(i, j, Multiplier.TRIPLE_LETTER);
                 }
             }
         }
