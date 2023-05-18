@@ -197,7 +197,9 @@ public class Game{
         }
        close();
     }
-    private void close(){System.exit(10);}
+    private void close(){
+        //throw new UnsupportedOperationException();}
+        System.exit(10);}
 
     private void removeLetters(List<Letter> takenLetters) {
         for(Letter letter : takenLetters) {
