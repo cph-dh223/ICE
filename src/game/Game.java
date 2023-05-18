@@ -141,6 +141,7 @@ public class Game{
                 }
                 currentPlayer.removeLetters(toBePlacedLetters);
                 currentPlayer.addScore(playerScore);
+                System.out.println("Word points: " + playerScore);
                 addRandomLettersToPlayer(toBePlacedLetters.size(), currentPlayer);
                 displayPlayerLetters(currentPlayer);
                 return;
