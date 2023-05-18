@@ -22,6 +22,7 @@ public class GUI extends PApplet implements IUI {
     private int finalMouseY;
     private boolean clicked;
     private int tileSize = -1;
+    private char[] playerLetters;
 
 
     public GUI(){
@@ -33,7 +34,8 @@ public class GUI extends PApplet implements IUI {
     }
 
     public void settings(){
-        fullScreen();
+        //fullScreen();
+        size(1920,1080);
 
     }
 
@@ -100,15 +102,14 @@ public class GUI extends PApplet implements IUI {
         String option = "";
         displayMessage(msg);
         while(!clicked && keyCode != ENTER) {
-
             if(keyPressed) {
                 option = getInputTextBox();
-                //option += getInputMouseLetter();
                 break;
             }
             else if(mousePressed) {
                 try {
                     option = getMouseInputPostion();
+                    option += getInputMouseLetter();
                 } catch (IllegalArgumentException e) {
                     getInput(msg);
                 }
@@ -116,8 +117,8 @@ public class GUI extends PApplet implements IUI {
             delay(10);
         }
         clicked = false;
+        System.out.println(option);
         return option;
-
     }
 
     private String getInputCoordinates() {
@@ -139,7 +140,7 @@ public class GUI extends PApplet implements IUI {
             delay(1);
         }
         textBox.beginDraw();
-        textBox.clear();
+        textBox.background(255);
         textBox.endDraw();
         redraw();
         return inputText;
@@ -211,12 +212,13 @@ public class GUI extends PApplet implements IUI {
 
     @Override
     public void keyPressed() {
-
         if (key >= 'A' && key <= 'z' || key >= '0' && key <= '9' || key == ',') {
             inputText += key;
         }
         if(key == BACKSPACE){
-            inputText = inputText.substring(0,inputText.length()-1);
+            if(inputText.length() > 0) {
+                inputText = inputText.substring(0,inputText.length()-1);
+            }
         }
 
         displayTextBox();
@@ -225,7 +227,6 @@ public class GUI extends PApplet implements IUI {
     public String getMouseInputPostion() throws IllegalArgumentException{
         int x = -1;
         int y = -1;
-
         if(clicked) {
             x = (int)map(finalMouseX, width/2, width, 0, 15);
             y = (int)map(finalMouseY, 0, width/2, 0, 15);
@@ -238,6 +239,7 @@ public class GUI extends PApplet implements IUI {
     public String getInputMouseLetter() throws IllegalArgumentException{
         int x = -1;
         int y = -1;
+        String output = "";
 
         if(clicked) {
             x = (int)map(finalMouseX, width-(sizeOfText/2)-(sizeOfText*7), width-sizeOfText/2, 0, 7);
@@ -245,7 +247,18 @@ public class GUI extends PApplet implements IUI {
                 throw new IllegalArgumentException();
             }
         }
-        return x+","+y+",";
+        try {
+            try {
+                output = ""+playerLetters[x];
+            }
+            catch (NullPointerException e) {
+                output = "";
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            getInputMouseLetter();
+        }
+        return output;
     }
 
     public void mouseClicked() {
@@ -256,7 +269,7 @@ public class GUI extends PApplet implements IUI {
     @Override
     public void displayHand(String playerName,List<Letter> letters) {
         String playerString = "Current player:" + playerName;
-
+        playerLetters = new char[letters.size()];
         handGraphic.beginDraw();
         handGraphic.background(255);
         handGraphic.textSize(sizeOfText);
@@ -267,6 +280,7 @@ public class GUI extends PApplet implements IUI {
         handGraphic.textAlign(3,102);//center,bottom
         for (int i = 0; i < letters.size(); i++) {
             char letter = letters.get(i).getLetter();
+            playerLetters[i] = letter;
             handGraphic.fill(255);
             handGraphic.rect(-(i * sizeOfText) + handGraphic.width - (int)(sizeOfText * 1.5), (sizeOfText / 5), sizeOfText , sizeOfText);
             handGraphic.fill(0);
