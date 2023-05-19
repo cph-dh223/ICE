@@ -198,7 +198,6 @@ public class Game{
        else {
             ui.displayMessage("It is a draw!");
         }
-       close();
     }
 
 
