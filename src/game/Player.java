@@ -23,18 +23,17 @@ public class Player {
 
     public void removeLetters(List<Letter> lettersToBeRemoved){
 
-        int sizeOfList = lettersToBeRemoved.size();
-        
         for (int i = letters.size()-1; i >= 0; i--) {
             Letter letter = letters.get(i);
 
-            if(sizeOfList == 0) { return; }
+            if(lettersToBeRemoved.size() == 0) { return; }
 
-            for (int j = sizeOfList-1; j >= 0 ; j--) {
+            for (int j = lettersToBeRemoved.size()-1; j >= 0 ; j--) {
                 Letter letterToBeRemoved = lettersToBeRemoved.get(j);
                 if (letter.equals(letterToBeRemoved)) {
                     letters.remove(letter);
-                    sizeOfList --;
+                    lettersToBeRemoved.remove(letter);
+                    break;
                 }
             }
         }
