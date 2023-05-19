@@ -163,7 +163,7 @@ public class Game{
                 int toBePlacedLettersSize = toBePlacedLetters.size();
                 currentPlayer.removeLetters(toBePlacedLetters);
                 currentPlayer.addScore(playerScore);
-                System.out.println("You got " + playerScore + " points");
+                ui.displayMessage("You got " + playerScore + " points");
                 addRandomLettersToPlayer(toBePlacedLettersSize, currentPlayer);
                 displayPlayerLetters(currentPlayer);
                 return;
