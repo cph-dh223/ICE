@@ -14,8 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class IO {
-    private Board board;
-    private ArrayList<Player> players;
+
     private static IO instance;
 
     private IO(){
@@ -39,12 +38,10 @@ public class IO {
         return data;
     }
 
-    public List<String> saveBoard(){
+    public static List<String> saveBoard(Tile[][] tiles, int width, int height){
 
         String dataOnTile = "";
-        Tile[][] tiles = board.getTiles();
-        int width = board.getWidth();
-        int height = board.getHeight();
+
         List<String> DataForTile = new ArrayList<>();
         for (int x = 1; x < width ; x++){
             for (int y = 1; y < height; y++){
@@ -61,7 +58,7 @@ public class IO {
         return DataForTile;
     }
 
-    public List<String> savePlayer(){
+    public static List<String> savePlayer(ArrayList<Player> players){
                 String savePlayer = "";
         List<String> DataForPlayers = new ArrayList<>();
 
@@ -80,11 +77,11 @@ public class IO {
 
     }
 
-    public void saveData(ArrayList<Player> players, Board board){
+    public static void saveData(ArrayList<Player> players, Board board){
         FileWriter writer = null;
         //Tile[][] boardTiles = board.getTiles();
-        List<String> DataPlayers = savePlayer();
-        List<String> boardTiles = saveBoard();
+        List<String> DataPlayers = savePlayer(players);
+        List<String> boardTiles = saveBoard(board.getTiles(),board.getWidth(),board.getHeight());
         System.out.println();
         try {
             writer = new FileWriter("./data/Data.csv");
