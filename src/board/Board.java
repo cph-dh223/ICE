@@ -983,6 +983,9 @@ public class Board {
     public char getLetter(int x, int y){
         return tiles[x][y].getLetter() == null ? ' ' : tiles[x][y].getLetterChar();
     }
+    public Tile[][] getTiles(){
+        return tiles;
+    }
 
     public Tile getTile(int x, int y){
         return tiles[x][y];
