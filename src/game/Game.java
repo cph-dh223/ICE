@@ -99,10 +99,8 @@ public class Game{
 
     private void saveGame(){
 
-      IO.
-
-
-
+        System.out.println("The game is saved. Thanks for this time");
+      IO.saveData(players,board);
 
     }
 
