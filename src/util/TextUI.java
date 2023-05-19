@@ -39,10 +39,10 @@ public class TextUI implements IUI{
                     continue;
                 }
 
-                char letter = board.getLetter(i, j);
+                char letter = board.getLetter(j, i);
                 // DISPLAY ADDED LETTERS
                 for(Tile tile : board.getToBePlaced()) {
-                    if (tile.getPositionX() == i && tile.getPositionY() == j) {
+                    if (tile.getPositionX() == j && tile.getPositionY() == i) {
                         letter = tile.getLetterChar();
                     }
                 }
