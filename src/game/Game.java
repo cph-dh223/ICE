@@ -88,6 +88,7 @@ public class Game{
                     break;
                 case "3":
                     endGame();
+                    
                     break;
                 default:
                     ui.displayMessage("The input did not match any of the options, please try again");
@@ -196,7 +197,7 @@ public class Game{
     }
     private void close(){
         //throw new UnsupportedOperationException();}
-        System.exit(10);}
+        }
 
     private void removeLetters(List<Letter> takenLetters) {
         for(Letter letter : takenLetters) {
