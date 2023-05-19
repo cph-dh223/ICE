@@ -128,13 +128,12 @@ public class Game{
     
     
     private void placeLetters() {
-
         ui.displayMessage("Choose where to place what letter in this format: x,y,letter.");
         List<Letter> toBePlacedLetters = new ArrayList<>(1);
+        String input;
         while(true){
             ui.displayBoard(board);
-          
-            String input = ui.getInput("Next letter or type 'y' to confirm selection");
+                input = ui.getInput("Next letter or type 'y' to confirm selection");
             if (input.equalsIgnoreCase("y")) {
                 int playerScore = board.checkSubmittedLetters();
 
@@ -154,7 +153,11 @@ public class Game{
             }
 
             String[] letter = input.replaceAll(" *", "").split(",");
-            board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(Character.toUpperCase(letter[2].charAt(0))));
+            try {
+                board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(Character.toUpperCase(letter[2].charAt(0))));
+            } catch(ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                continue;
+            }
             // Tilføjet af mig
             Letter toBePlacedLetter = currentPlayer.getLetter(letter[2].charAt(0));
             toBePlacedLetters.add(toBePlacedLetter);
