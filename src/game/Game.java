@@ -76,7 +76,6 @@ public class Game{
         players.add(player2);
         
         board = new Board(defaultWidth, defaultHeight, dict);
-        ui.displayBoard(board);
         gameLoop();
     }
 
@@ -117,10 +116,10 @@ public class Game{
     private void gameLoop(){
         currentPlayer = players.get(0);
         while (true) {
-            ui.displayBoard(board);
             ui.displayMessage("Current player is: " + currentPlayer.getName());
             ui.displayMenu(new String[]{"1) Place letter(s)","2) Extange letter(s)","3) End the game","4) Save game"});
             displayPlayerLetters(currentPlayer);
+            ui.displayBoard(board);
             String option = ui.getInput("Please type number to choose option");
             switch (option) {
                 case "1":
