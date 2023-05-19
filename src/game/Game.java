@@ -27,7 +27,6 @@ public class Game{
         players = new ArrayList<Player>();
         dataSetup();
         mainMenu();
-        close();
     }
 
     private final int defaultWidth = 15;
@@ -153,13 +152,16 @@ public class Game{
     
     
     private void extangeLetters() {
+        if(letters.size() == 0){
+            ui.displayMessage("There are no more letters in the bag of letters this forfits your turn");//TODO: bedere way of handeling this
+        }
+        displayPlayerLetters(currentPlayer);
         String input = ui.getInput("Choose what letters to replace");
         List<Letter> lettersToReplace = new ArrayList<>();
         char[] charsToReplase = input.replaceAll(" *,*", "").toCharArray();
         for(char c : charsToReplase){
             lettersToReplace.add(currentPlayer.getLetter(c));
         }
-        //TODO: order of operations, skal dem man bytter først tilføges til letters listen eller skal man først trejke nye og så tilføge dem man vil a med til listen
         currentPlayer.removeLetters(lettersToReplace);
         letters.addAll(lettersToReplace);
         addRandomLettersToPlayer(lettersToReplace.size(), currentPlayer);
@@ -184,7 +186,6 @@ public class Game{
         }
        close();
     }
-    private void close(){throw new UnsupportedOperationException();}
 
     private void removeLetters(List<Letter> takenLetters) {
         for(Letter letter : takenLetters) {
