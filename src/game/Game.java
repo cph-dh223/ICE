@@ -1,5 +1,7 @@
 package game;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -99,6 +101,17 @@ public class Game{
             }
         }
     }
+
+
+
+    private void saveGame(){
+
+        System.out.println("The game is saved. Thanks for this time");
+      IO.saveData(players,board);
+
+    }
+
+
     private void loadSavedGame(){throw new UnsupportedOperationException();}
     
     private void gameLoop(){
@@ -119,6 +132,7 @@ public class Game{
                 case "3":
                     return;
                 case "4":
+                    saveGame();
                     // save game
                     break;
                 default:

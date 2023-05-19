@@ -6,5 +6,4 @@ public class Main extends PApplet{
         PApplet.main("util.GUI");
         new Game();
     }
-
 }
