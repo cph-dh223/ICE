@@ -104,10 +104,7 @@ public class Game{
 
 
     private void saveGame(){
-
-        System.out.println("The game is saved. Thanks for this time");
-      IO.saveData(players,board);
-
+        IO.saveData(players,board);
     }
 
 
