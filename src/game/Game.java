@@ -28,7 +28,6 @@ public class Game{
         players = new ArrayList<Player>();
         dataSetup();
         mainMenu();
-        close();
     }
 
     private final int defaultWidth = 15;
@@ -185,7 +184,6 @@ public class Game{
         }
        close();
     }
-    private void close(){throw new UnsupportedOperationException();}
 
     private void removeLetters(List<Letter> takenLetters) {
         for(Letter letter : takenLetters) {
