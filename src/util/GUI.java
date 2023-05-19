@@ -6,13 +6,12 @@ import board.Board;
 import board.Multiplier;
 import board.Tile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GUI extends PApplet implements IUI {
     private static GUI instanse;
     private String inputText = "";
-    private final int sizeOfText = 40;
+    private final int sizeOfText = 35;
     private PGraphics textBox;
     private PGraphics menuGraphic;
     private PGraphics msgGraphic;
@@ -23,6 +22,10 @@ public class GUI extends PApplet implements IUI {
     private int finalMouseY;
     private boolean clicked;
     private int tileSize = -1;
+    private char[] playerLetters;
+    String tmpInput;
+    boolean enter;
+    boolean waitingForKey;
 
 
     public GUI(){
@@ -34,7 +37,8 @@ public class GUI extends PApplet implements IUI {
     }
 
     public void settings(){
-        fullScreen();
+        //fullScreen();
+        size(1920,1080);
 
     }
 
@@ -67,8 +71,23 @@ public class GUI extends PApplet implements IUI {
         msgGraphic.textSize(sizeOfText);
         msgGraphic.text(msg, 0,50);
         msgGraphic.endDraw();
-
         redraw();
+        delay(3000);
+        waitingForKey = true;
+        // noLoop
+    }
+
+    public void displayMessageNoTypeDelay(String msg) {
+        // Visually show message on screen
+        msgGraphic.beginDraw();
+        msgGraphic.background(255);
+        msgGraphic.fill(0);
+        msgGraphic.textSize(sizeOfText);
+        msgGraphic.text(msg, 0,50);
+        msgGraphic.endDraw();
+        redraw();
+        //delay(0);
+        waitingForKey = true;
         // noLoop
     }
 
@@ -94,27 +113,23 @@ public class GUI extends PApplet implements IUI {
 
     @Override
     public String getInput(String msg) {
-        clicked = false;
-        String option = "";
-        displayMessage(msg);
-        while(!clicked && keyCode != ENTER) {
-
-            if(keyPressed) {
-                option = getInputTextBox();
-                break;
-            }
-            else if(mousePressed) {
-                try {
-                    option = getMouseInputPlaceLetter();
-                } catch (IllegalArgumentException e) {
-                    getInput(msg);
-                }
-            }
-            delay(10);
+        String outputText;
+        waitingForKey = false;
+        displayMessageNoTypeDelay(msg);
+        enter = false;
+        inputText = "";
+        waitingForKey = true;
+        while(!enter) {
+            delay(0);
         }
-        clicked = false;
-        return option;
-
+        waitingForKey = false;
+        textBox.beginDraw();
+        textBox.background(255);
+        textBox.endDraw();
+        redraw();
+        outputText = inputText;
+        inputText = "";
+        return outputText;
     }
 
     private String getInputCoordinates() {
@@ -128,20 +143,6 @@ public class GUI extends PApplet implements IUI {
             }
         }
     }
-
-    // Visual TextBox as a replacement for console
-    private String getInputTextBox() {
-        inputText = "";
-        while(!keyPressed || keyCode != ENTER) {
-            delay(1);
-        }
-        textBox.beginDraw();
-        textBox.clear();
-        textBox.endDraw();
-        redraw();
-        return inputText;
-    }
-
 
     private void displayTextBox() {
         textBox.beginDraw();
@@ -195,6 +196,13 @@ public class GUI extends PApplet implements IUI {
                 if(board.getTile(i, j).getLetter() != null) {
                     boardGraphic.fill(0);
                     char tileChar = board.getTile(i, j).getLetterChar();
+                    // DISPLAY ADDED LETTERS
+                    for(Tile tile : board.getToBePlaced()) {
+                        if (tile.getPositionX() == i && tile.getPositionY() == j) {
+                            boardGraphic.fill(200,0,0);
+                            tileChar = tile.getLetterChar();
+                        }
+                    }
                     boardGraphic.text(tileChar, i * tileSize + tileSize/2 + strokeWeight,j*tileSize + tileSize/2 - strokeWeight);
                     boardGraphic.stroke(0);
                     boardGraphic.fill(255);
@@ -206,23 +214,26 @@ public class GUI extends PApplet implements IUI {
         redraw();
     }
 
-    @Override
     public void keyPressed() {
-
-        if (key >= 'A' && key <= 'z' || key >= '0' && key <= '9' || key == ',') {
-            inputText += key;
+        if(waitingForKey) {
+            if (key >= 'A' && key <= 'z' || key >= '0' && key <= '9' || key == ',') {
+                inputText += key;
+                displayTextBox();
+            } else if (key == BACKSPACE) {
+                if (inputText.length() > 0) {
+                    inputText = inputText.substring(0, inputText.length() - 1);
+                }
+                displayTextBox();
+            } else if (key == ENTER && inputText.length() > 0) {
+                enter = true;
+            }
         }
-        if(key == BACKSPACE){
-            inputText = inputText.substring(0,inputText.length()-1);
-        }
 
-        displayTextBox();
     }
 
-    public String getMouseInputPlaceLetter() throws IllegalArgumentException{
+    public String getMouseInputPostion() throws IllegalArgumentException{
         int x = -1;
         int y = -1;
-
         if(clicked) {
             x = (int)map(finalMouseX, width/2, width, 0, 15);
             y = (int)map(finalMouseY, 0, width/2, 0, 15);
@@ -231,6 +242,30 @@ public class GUI extends PApplet implements IUI {
             }
         }
         return ""+x+","+y;
+    }
+    public String getInputMouseLetter() throws IllegalArgumentException{
+        int x = -1;
+        int y = -1;
+        String output = "";
+
+        if(clicked) {
+            x = (int)map(finalMouseX, width-(sizeOfText/2)-(sizeOfText*7), width-sizeOfText/2, 0, 7);
+            if (x < 0 || x > 7 || y < width/2 || y > sizeOfText) {
+                throw new IllegalArgumentException();
+            }
+        }
+        try {
+            try {
+                output = ""+playerLetters[x];
+            }
+            catch (NullPointerException e) {
+                output = "";
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            getInputMouseLetter();
+        }
+        return output;
     }
 
     public void mouseClicked() {
@@ -241,7 +276,7 @@ public class GUI extends PApplet implements IUI {
     @Override
     public void displayHand(String playerName,List<Letter> letters) {
         String playerString = "Current player:" + playerName;
-
+        playerLetters = new char[letters.size()];
         handGraphic.beginDraw();
         handGraphic.background(255);
         handGraphic.textSize(sizeOfText);
@@ -252,6 +287,7 @@ public class GUI extends PApplet implements IUI {
         handGraphic.textAlign(3,102);//center,bottom
         for (int i = 0; i < letters.size(); i++) {
             char letter = letters.get(i).getLetter();
+            playerLetters[i] = letter;
             handGraphic.fill(255);
             handGraphic.rect(-(i * sizeOfText) + handGraphic.width - (int)(sizeOfText * 1.5), (sizeOfText / 5), sizeOfText , sizeOfText);
             handGraphic.fill(0);
@@ -259,6 +295,9 @@ public class GUI extends PApplet implements IUI {
         }
         handGraphic.endDraw();
         redraw();
+    }
 
+    public static boolean isAlphaNumeric(String s) {
+        return s != null && s.matches("^[a-zA-Z0-9]*$");
     }
 }
