@@ -22,6 +22,8 @@ public class Game{
     private IUI ui;
 
     public Game() {
+        
+        //ui = new TextUI();
         ui = GUI.getInstance();
         letters = new ArrayList<Letter>();
         players = new ArrayList<Player>();
@@ -86,6 +88,7 @@ public class Game{
                     break;
                 case "3":
                     endGame();
+                    
                     break;
                 default:
                     ui.displayMessage("The input did not match any of the options, please try again");
@@ -125,33 +128,44 @@ public class Game{
     
     
     private void placeLetters() {
+
         ui.displayMessage("Choose where to place what letter in this format: x,y,letter.");
-        List<Letter> toBePlacedLetters = new ArrayList<Letter>(1);
+        List<Letter> toBePlacedLetters = new ArrayList<>(1);
         while(true){
             ui.displayBoard(board);
+          
             String input = ui.getInput("Next letter or type 'y' to confirm selection");
             if (input.equalsIgnoreCase("y")) {
                 int playerScore = board.checkSubmittedLetters();
+
                 if (playerScore == -1) {
-                    ui.displayMessage("you did not place a valid word please try again");
+                    ui.displayMessage("You did not place a valid word. Please try again");
                     placeLetters();
                     return;
                 }
+
                 board.updateBoard();
                 currentPlayer.removeLetters(toBePlacedLetters);
                 currentPlayer.addScore(playerScore);
-                System.out.println("Word points: " + playerScore);
+                System.out.println("You got " + playerScore + " points");
                 addRandomLettersToPlayer(toBePlacedLetters.size(), currentPlayer);
                 displayPlayerLetters(currentPlayer);
                 return;
             }
+
             String[] letter = input.replaceAll(" *", "").split(",");
             board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(letter[2].charAt(0)));
+            // Tilføjet af mig
+            Letter toBePlacedLetter = currentPlayer.getLetter(letter[2].charAt(0));
+            toBePlacedLetters.add(toBePlacedLetter);
+            System.out.println("Size of the list of letters used: " + toBePlacedLetters.size());
+
         }
     }
     
     
     private void extangeLetters() {
+
         if(letters.size() == 0){
             ui.displayMessage("There are no more letters in the bag of letters this forfits your turn");//TODO: bedere way of handeling this
         }
@@ -168,7 +182,7 @@ public class Game{
     }
     
     private void displayPlayerLetters(Player player) {
-        ui.displayHand(player.getName() ,player.getLetters());
+        ui.displayHand(player.getName(), player.getLetters());
     }
     
     private void endGame() {
@@ -186,6 +200,7 @@ public class Game{
         }
        close();
     }
+
 
     private void removeLetters(List<Letter> takenLetters) {
         for(Letter letter : takenLetters) {
