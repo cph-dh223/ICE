@@ -42,7 +42,7 @@ public class GUI extends PApplet implements IUI {
         textBox = createGraphics(width,height);
         noLoop();
         menuGraphic = createGraphics(width/2,height/2);
-        msgGraphic = createGraphics(width,height/10);
+        msgGraphic = createGraphics(width,height/10+sizeOfText*2);
         handGraphic = createGraphics(width/2, height/5);
     }
 
@@ -51,7 +51,7 @@ public class GUI extends PApplet implements IUI {
         fill(0);
         image(textBox,0,0);
         image(menuGraphic,20,50);
-        image(msgGraphic,20,(3 * height)/4);
+        image(msgGraphic,20,(3 * height)/4-sizeOfText);
         image(handGraphic,width/2,height - sizeOfText * 2);
         if(boardImage != null){
             image(boardImage,width/2,0);
@@ -68,7 +68,7 @@ public class GUI extends PApplet implements IUI {
         msgGraphic.text(msg, 0,50);
         msgGraphic.endDraw();
         redraw();
-        delay(3000);
+        delay(msg.length()*50);
         waitingForKey = true;
         // noLoop
     }

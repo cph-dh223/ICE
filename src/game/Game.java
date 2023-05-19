@@ -144,7 +144,7 @@ public class Game{
     
     
     private void placeLetters() {
-        ui.displayMessage("Choose where to place what letter in this format: x,y,letter.");
+        ui.displayMessage("Choose where to place what letter in this format: \nx,y,letter.");
         List<Letter> toBePlacedLetters = new ArrayList<>(1);
         String input;
         while(true){
