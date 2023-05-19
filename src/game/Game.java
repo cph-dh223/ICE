@@ -22,13 +22,13 @@ public class Game{
     private IUI ui;
 
     public Game() {
-        //ui = GUI.getInstance();
-        ui = new TextUI();
+        
+        //ui = new TextUI();
+        ui = GUI.getInstance();
         letters = new ArrayList<Letter>();
         players = new ArrayList<Player>();
         dataSetup();
         mainMenu();
-        close();
     }
 
     private final int defaultWidth = 15;
@@ -119,7 +119,7 @@ public class Game{
                     break;
                 default:
                     ui.displayMessage("You did not choose one of the given options please choose");
-                    break;
+                    continue;
             }
             
             currentPlayer = players.get((players.indexOf(currentPlayer) + 1) % players.size());
@@ -128,10 +128,12 @@ public class Game{
     
     
     private void placeLetters() {
-        ui.displayMessage("Choose where to place what letter in this format: x,y,letter. Or press enter to signal you are done with your selection");
-        List<Letter> toBePlacedLetters = new ArrayList<>();
 
+        ui.displayMessage("Choose where to place what letter in this format: x,y,letter.");
+        List<Letter> toBePlacedLetters = new ArrayList<>(1);
         while(true){
+            ui.displayBoard(board);
+          
             String input = ui.getInput("Next letter or type 'y' to confirm selection");
             if (input.equalsIgnoreCase("y")) {
                 int playerScore = board.checkSubmittedLetters();
@@ -163,14 +165,17 @@ public class Game{
     
     
     private void extangeLetters() {
-        String input = ui.getInput("Choose what letters to replace in this format: Letter, letter, etc. Ex: L,A,A,B");
 
+        if(letters.size() == 0){
+            ui.displayMessage("There are no more letters in the bag of letters this forfits your turn");//TODO: bedere way of handeling this
+        }
+        displayPlayerLetters(currentPlayer);
+        String input = ui.getInput("Choose what letters to replace");
         List<Letter> lettersToReplace = new ArrayList<>();
         char[] charsToReplase = input.replaceAll(" *,*", "").toCharArray();
         for(char c : charsToReplase){
             lettersToReplace.add(currentPlayer.getLetter(c));
         }
-        //TODO: order of operations, skal dem man bytter først tilføges til letters listen eller skal man først trejke nye og så tilføge dem man vil a med til listen
         currentPlayer.removeLetters(lettersToReplace);
         letters.addAll(lettersToReplace);
         addRandomLettersToPlayer(lettersToReplace.size(), currentPlayer);
@@ -195,9 +200,7 @@ public class Game{
         }
        close();
     }
-    private void close(){
-        //throw new UnsupportedOperationException();}
-        }
+
 
     private void removeLetters(List<Letter> takenLetters) {
         for(Letter letter : takenLetters) {

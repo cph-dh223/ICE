@@ -1,10 +1,12 @@
 package util;
 
+import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import board.Board;
+import board.Tile;
 import game.Letter;
 
 public class TextUI implements IUI{
@@ -36,7 +38,14 @@ public class TextUI implements IUI{
                     //System.out.print(" "+i+" ");
                     continue;
                 }
-                char letter = board.getLetter(j, i);
+
+                char letter = board.getLetter(i, j);
+                // DISPLAY ADDED LETTERS
+                for(Tile tile : board.getToBePlaced()) {
+                    if (tile.getPositionX() == i && tile.getPositionY() == j) {
+                        letter = tile.getLetterChar();
+                    }
+                }
                 
                 System.out.print("|" + letter + "");
             }

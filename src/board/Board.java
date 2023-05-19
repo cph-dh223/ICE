@@ -987,5 +987,9 @@ public class Board {
     public Tile getTile(int x, int y){
         return tiles[x][y];
     }
+
+    public List<Tile> getToBePlaced() {
+        return toBePlaced;
+    }
 }
 
