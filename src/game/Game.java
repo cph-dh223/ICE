@@ -129,14 +129,14 @@ public class Game{
     private void placeLetters() {
         ui.displayMessage("Choose where to place what letter in this format: x,y,letter. Or press enter to signal you are done with your selection");
         List<Letter> toBePlacedLetters = new ArrayList<>();
-        while(true){
-            String input = ui.getInput("Next letter or confirm selection");
 
-            if (input.equals("")) {
+        while(true){
+            String input = ui.getInput("Next letter or type 'y' to confirm selection");
+            if (input.equalsIgnoreCase("y")) {
                 int playerScore = board.checkSubmittedLetters();
 
                 if (playerScore == -1) {
-                    ui.displayMessage("you did not place a valid word please try again");
+                    ui.displayMessage("You did not place a valid word. Please try again");
                     placeLetters();
                     return;
                 }
@@ -144,12 +144,11 @@ public class Game{
                 board.updateBoard();
                 currentPlayer.removeLetters(toBePlacedLetters);
                 currentPlayer.addScore(playerScore);
-                System.out.println("You got: " + playerScore + " points");
+                System.out.println("You got " + playerScore + " points");
                 addRandomLettersToPlayer(toBePlacedLetters.size(), currentPlayer);
                 displayPlayerLetters(currentPlayer);
                 return;
             }
-
 
             String[] letter = input.replaceAll(" *", "").split(",");
             board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(letter[2].charAt(0)));
@@ -166,8 +165,6 @@ public class Game{
         String input = ui.getInput("Choose what letters to replace in this format: Letter, letter, etc. Ex: L,A,A,B");
 
         List<Letter> lettersToReplace = new ArrayList<>();
-
-
         char[] charsToReplase = input.replaceAll(" *,*", "").toCharArray();
         for(char c : charsToReplase){
             lettersToReplace.add(currentPlayer.getLetter(c));

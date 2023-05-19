@@ -93,7 +93,6 @@ public class Board {
             toBePlaced.clear();
             tempTripleWordCounter = 0;
             return -1;
-
         }
 
         // Creating copy of board with toBePlaced letters in board
@@ -104,19 +103,16 @@ public class Board {
         // Counting the number of times the checkSubmittedLetters() has been called
         wordSubmittedCounter ++;
 
-
         // If it's the first time it's called, word placement is checked to see if it's in center of board
         if (wordSubmittedCounter == 1) {
 
             // Is first word placed in center:
             firstWordInCenter = checkFirstWordPlacement();
 
-
             if (firstWordInCenter == false){
                 wordSubmittedCounter = 0;
                 return -1;
             }
-
             boolean areFirstWordConnected = areLettersConnectedToAnyLetter();
 
             if(areFirstWordConnected == false) {
@@ -280,9 +276,9 @@ public class Board {
                     return Direction.WRONG;
                 }
 
-                //################################################################################################
-                // LETTER PLACED AT LEFT EDGE OF BOARD BUT NOT IN CORNER
-                //################################################################################################
+            //################################################################################################
+            // LETTER PLACED AT LEFT EDGE OF BOARD BUT NOT IN CORNER
+            //################################################################################################
 
                 // 1.2 If the toBePlaced tile is at the LEFT edge of board but NOT IN THE CORNER...
             } else if (x == 0
@@ -499,8 +495,7 @@ public class Board {
 
                 // 1.92 If there IS a tile WITH A LETTER ABOVE the toBePlaced tile...
                 // OBS!!! This is a copy of an if statement above
-                else if (tiles[x][y-1].getLetterChar()
-                        != '_') {
+                else if (tiles[x][y-1].getLetterChar() != '_') {
                     // ...then the direction is VERTICAL.
                     return Direction.VERTICAL;
 
@@ -550,7 +545,6 @@ public class Board {
                 return Direction.WRONG;
             }
         }
-
         // Returns WRONG in all other cases (it shouldn't be possible but IntelliJ demands it)
         return Direction.WRONG;
     }
@@ -598,7 +592,6 @@ public class Board {
                 int notImportant = 0;
 
             } else {
-
                 return false;
             }
         }
@@ -782,7 +775,6 @@ public class Board {
                     // OBS!!! This method could be incorporated in areLettersProperlyConnected()
                     // which would remove some repetition of code
                     checkForConnectedLetters(x, y, justPlaced, direction);
-
                 }
 
                 // Every letter point is calculated through countPoints()
@@ -830,10 +822,7 @@ public class Board {
                     posXAndposY.add(y);
 
                     tempLettersWithWordsToGoThrough.put(tempFlaggedLettersCounter, posXAndposY);
-
                 }
-
-
                 // If the letter getting checked is NOT at the edge of the board AND there is either a letter on the LEFT
                 // or on the RIGHT
                 else if ((x > 0 && (tempTiles[x-1][y].getLetterChar() != '_')) || (x < this.width-1 && tempTiles[x+1][y].getLetterChar() !='_')) {
@@ -844,7 +833,6 @@ public class Board {
                     posXAndposY.add(y);
 
                     tempLettersWithWordsToGoThrough.put(tempFlaggedLettersCounter, posXAndposY);
-
                 }
             }
         }
@@ -856,11 +844,9 @@ public class Board {
                 if ( (y == 0 && tempTiles[x][y+1].getLetterChar() !='_') || (y == this.height-1 && tempTiles[x][y-1].getLetterChar() !='_')) {
 
                     tempFlaggedLettersCounter +=1;
-
                     List<Integer> posXAndposY = new ArrayList<>();
                     posXAndposY.add(x);
                     posXAndposY.add(y);
-
                     tempLettersWithWordsToGoThrough.put(tempFlaggedLettersCounter, posXAndposY);
                 }
                 // If letter getting checked is NOT at the edge of the board
@@ -908,7 +894,6 @@ public class Board {
                     break;
 
                 //if the letter that the (outside) while loop is at is a DL
-
                 case DOUBLE_LETTER:
                     letterPoint = letterPoint*2;
                     break;
@@ -946,7 +931,6 @@ public class Board {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -973,10 +957,8 @@ public class Board {
                     tempTripleWordCounter --;
                 }
             }
-
             return totalPointsOfWord;
         }
-        //tempTotalWordPoints = -1;
         return -1;
     }
 
