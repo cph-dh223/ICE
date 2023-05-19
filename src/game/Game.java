@@ -28,8 +28,8 @@ public class Game{
 
     public Game() {
         
-        //ui = new TextUI();
-        ui = GUI.getInstance();
+        ui = new TextUI();
+        //ui = GUI.getInstance();
         letters = new ArrayList<Letter>();
         players = new ArrayList<Player>();
         dataSetup();
@@ -133,7 +133,6 @@ public class Game{
                     return;
                 case "4":
                     saveGame();
-                    // save game
                     break;
                 default:
                     ui.displayMessage("You did not choose one of the given options please choose");

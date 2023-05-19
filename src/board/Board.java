@@ -934,7 +934,6 @@ public class Board {
         return false;
     }
 
-
     public int countingPointsIfWordValid(boolean validWord, int letterPointsOfWord) {
 
         int totalPointsOfWord = letterPointsOfWord;
@@ -991,5 +990,13 @@ public class Board {
     public List<Tile> getToBePlaced() {
         return toBePlaced;
     }
+
+    public Tile[][] getTiles(){
+        return tiles;
+    }
+
+
+
+
 }
 
