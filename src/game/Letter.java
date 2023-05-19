@@ -21,4 +21,19 @@ public class Letter {
     public String toString(){
         return ""+getLetter();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this) {
+            return true;
+        }
+        if(!(obj instanceof Letter)){
+            return false;
+        }
+        Letter other = (Letter)obj;
+        if(other.getLetter() == letter){
+            return true;
+        }
+        return false;
+    }
 }

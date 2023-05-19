@@ -160,10 +160,11 @@ public class Game{
                 }
 
                 board.updateBoard();
+                int toBePlacedLettersSize = toBePlacedLetters.size();
                 currentPlayer.removeLetters(toBePlacedLetters);
                 currentPlayer.addScore(playerScore);
                 System.out.println("You got " + playerScore + " points");
-                addRandomLettersToPlayer(toBePlacedLetters.size(), currentPlayer);
+                addRandomLettersToPlayer(toBePlacedLettersSize, currentPlayer);
                 displayPlayerLetters(currentPlayer);
                 return;
             }
@@ -191,13 +192,14 @@ public class Game{
         displayPlayerLetters(currentPlayer);
         String input = ui.getInput("Choose what letters to replace");
         List<Letter> lettersToReplace = new ArrayList<>();
-        char[] charsToReplase = input.replaceAll(" *,*", "").toCharArray();
+        char[] charsToReplase = input.toUpperCase().replaceAll(" *,*", "").toCharArray();
         for(char c : charsToReplase){
             lettersToReplace.add(currentPlayer.getLetter(c));
         }
+        int lettersToReplaceSize = lettersToReplace.size();
         currentPlayer.removeLetters(lettersToReplace);
         letters.addAll(lettersToReplace);
-        addRandomLettersToPlayer(lettersToReplace.size(), currentPlayer);
+        addRandomLettersToPlayer(lettersToReplaceSize, currentPlayer);
     }
     
     private void displayPlayerLetters(Player player) {
