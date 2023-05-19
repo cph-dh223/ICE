@@ -154,7 +154,7 @@ public class Game{
             }
 
             String[] letter = input.replaceAll(" *", "").split(",");
-            board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(letter[2].charAt(0)));
+            board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(Character.toUpperCase(letter[2].charAt(0))));
             // Tilføjet af mig
             Letter toBePlacedLetter = currentPlayer.getLetter(letter[2].charAt(0));
             toBePlacedLetters.add(toBePlacedLetter);
