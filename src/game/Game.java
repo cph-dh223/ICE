@@ -129,6 +129,7 @@ public class Game{
         ui.displayMessage("Choose where to place what letter in this format: x,y,letter.");
         List<Letter> toBePlacedLetters = new ArrayList<Letter>(1);
         while(true){
+            ui.displayBoard(board);
             String input = ui.getInput("Next letter or type 'y' to confirm selection");
             if (input.equalsIgnoreCase("y")) {
                 int playerScore = board.checkSubmittedLetters();
