@@ -1,22 +1,27 @@
 package board;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import game.Letter;
 
 public class BoardTest {
 
     Board board;
+    
+    
  
     @BeforeEach
-    void setup(){
-        HashSet<String> dict = new HashSet<String>();
+    public void setup(){
+        Set<String>dict = new HashSet<String>();
         dict.add("word");
         dict.add("words");
         dict.add("wild");
@@ -24,30 +29,36 @@ public class BoardTest {
     }
 
     @AfterEach
-    void teardown(){
-        board = null;
+    public void teardown(){
+        // board = null;
     }
 
-    @Test
-    void goToFirstLetterTest(){
+    @Test // this test shuld work because the program woks as expected but it doesnt
+    public void goToFirstLetterTest(){
+
         // arrange
-        board.placeLetter(7, 7, new Letter('w', 1));
-        board.placeLetter(8, 7, new Letter('o', 1));
-        board.placeLetter(9, 7, new Letter('r', 1));
-        board.placeLetter(10, 7, new Letter('d', 1));
-        board.placeLetter(7, 8, new Letter('o', 1));
-        board.placeLetter(7, 9, new Letter('r', 1));
-        board.placeLetter(7, 10, new Letter('d', 1));
+        board.placeLetter(7, 7, new Letter(Character.toUpperCase('w'), 1));
+        board.placeLetter(8, 7, new Letter(Character.toUpperCase('o'), 1));
+        board.placeLetter(9, 7, new Letter(Character.toUpperCase('r'), 1));
+        board.placeLetter(10, 7, new Letter(Character.toUpperCase('d'), 1));
+        board.checkSubmittedLetters();
+        board.placeLetter(7, 8, new Letter(Character.toUpperCase('o'), 1));
+        board.placeLetter(7, 9, new Letter(Character.toUpperCase('r'), 1));
+        board.placeLetter(7, 10, new Letter(Character.toUpperCase('d'), 1));
+        board.checkSubmittedLetters();
         board.updateBoard();
 
-        int[] expected = new int[]{7,7};
-
-        // actaual
-        int[] actaulX = board.goToFirstLetterTest(10,7, Direction.HORISONTAL);
-        int[] actaulY = board.goToFirstLetterTest(7,10, Direction.VERTICAL);
+        List<Integer> expected = new ArrayList<>();
+        expected.add(7);
+        expected.add(7);
+        // act
+        List<Integer> actaulX = board.goToFirstLetter(10,7, Direction.HORISONTAL);
+        List<Integer> actaulY = board.goToFirstLetter(7,10, Direction.VERTICAL);
 
         // assert
-        assertArrayEquals(expected, actaulX);
-        assertArrayEquals(expected, actaulY);
+        assertEquals(expected.get(0), actaulX.get(0));
+        assertEquals(expected.get(1), actaulX.get(1));
+        assertEquals(expected.get(0), actaulY.get(0));
+        assertEquals(expected.get(1), actaulY.get(1));
     }
 }

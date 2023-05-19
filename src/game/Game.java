@@ -213,7 +213,6 @@ public class Game{
 
     /**
      * This method can take list of letters from player, requested by the player, add them to this letter list
-     * @List
      */
     private void addRandomLettersToPlayer(int amountOfLetters, Player player) {
         // Find random letters from letters list and use that list as parameter in player.addToLetters
