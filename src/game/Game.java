@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+
 import board.Board;
 import util.GUI;
 import util.IO;
@@ -20,6 +22,7 @@ public class Game{
     private Player currentPlayer;
     private Board board;
     private IUI ui;
+    private Set<String> dict;
 
     public Game() {
         
@@ -34,10 +37,10 @@ public class Game{
     private final int defaultWidth = 15;
     private final int defaultHeight = 15;
     private void dataSetup(){
-        List<String> dict = new ArrayList<String>();
+        List<String> loadedDict = new ArrayList<String>();
         List<String> lettersFromFile = new ArrayList<String>();
         try {
-            dict = IO.getDataFromTxt("./data/Dictionary.txt");
+            loadedDict = IO.getDataFromTxt("./data/Dictionary.txt");
         } catch (FileNotFoundException e) {
             ui.displayMessage("The dictionary file was not found please look in the data folder and make shure there is a \"Dictionary.txt\" file");
         }
@@ -55,7 +58,7 @@ public class Game{
                 letters.add(new Letter(letterChar, letterScore));
             }
         }
-        board = new Board(defaultWidth, defaultHeight, new HashSet(dict));
+        dict = new HashSet(loadedDict);
     }
     
     private void startGame(){
@@ -69,7 +72,8 @@ public class Game{
         addRandomLettersToPlayer(7, player2);
         players.add(player1);
         players.add(player2);
-
+        
+        board = new Board(defaultWidth, defaultHeight, dict);
         ui.displayBoard(board);
         gameLoop();
     }
