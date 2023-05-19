@@ -28,7 +28,7 @@ public class Game{
 
     public Game() {
         
-        //ui = new TextUI();
+        ui = new TextUI();
         ui = GUI.getInstance();
         letters = new ArrayList<Letter>();
         players = new ArrayList<Player>();
@@ -76,7 +76,6 @@ public class Game{
         players.add(player2);
         
         board = new Board(defaultWidth, defaultHeight, dict);
-        ui.displayBoard(board);
         gameLoop();
     }
 
@@ -117,10 +116,10 @@ public class Game{
     private void gameLoop(){
         currentPlayer = players.get(0);
         while (true) {
-            ui.displayBoard(board);
             ui.displayMessage("Current player is: " + currentPlayer.getName());
             ui.displayMenu(new String[]{"1) Place letter(s)","2) Extange letter(s)","3) End the game","4) Save game"});
             displayPlayerLetters(currentPlayer);
+            ui.displayBoard(board);
             String option = ui.getInput("Please type number to choose option");
             switch (option) {
                 case "1":
@@ -133,7 +132,6 @@ public class Game{
                     return;
                 case "4":
                     saveGame();
-                    // save game
                     break;
                 default:
                     ui.displayMessage("You did not choose one of the given options please choose");
@@ -146,13 +144,12 @@ public class Game{
     
     
     private void placeLetters() {
-
         ui.displayMessage("Choose where to place what letter in this format: x,y,letter.");
         List<Letter> toBePlacedLetters = new ArrayList<>(1);
+        String input;
         while(true){
             ui.displayBoard(board);
-          
-            String input = ui.getInput("Next letter or type 'y' to confirm selection");
+                input = ui.getInput("Next letter or type 'y' to confirm selection");
             if (input.equalsIgnoreCase("y")) {
                 int playerScore = board.checkSubmittedLetters();
 
@@ -172,7 +169,11 @@ public class Game{
             }
 
             String[] letter = input.replaceAll(" *", "").split(",");
-            board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(Character.toUpperCase(letter[2].charAt(0))));
+            try {
+                board.placeLetter(Integer.parseInt(letter[0]), Integer.parseInt(letter[1]), currentPlayer.getLetter(Character.toUpperCase(letter[2].charAt(0))));
+            } catch(ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                continue;
+            }
             // Tilføjet af mig
             Letter toBePlacedLetter = currentPlayer.getLetter(letter[2].charAt(0));
             toBePlacedLetters.add(toBePlacedLetter);
@@ -227,7 +228,6 @@ public class Game{
 
     /**
      * This method can take list of letters from player, requested by the player, add them to this letter list
-     * @List
      */
     private void addRandomLettersToPlayer(int amountOfLetters, Player player) {
         // Find random letters from letters list and use that list as parameter in player.addToLetters

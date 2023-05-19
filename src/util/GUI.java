@@ -19,10 +19,8 @@ public class GUI extends PApplet implements IUI {
     private PImage boardImage;
     private int finalMouseX;
     private int finalMouseY;
-    private boolean clicked;
     private int tileSize = -1;
     private char[] playerLetters;
-    String tmpInput;
     boolean enter;
     boolean waitingForKey;
 
@@ -130,18 +128,6 @@ public class GUI extends PApplet implements IUI {
         return outputText;
     }
 
-    private String getInputCoordinates() {
-        String coordinates = "mouseX: ";
-        while(true) {
-            System.out.println("Waiting for input"); // TODO: Some line has to be here for some reason??
-            if (mousePressed) {
-                coordinates += mouseX + " mouseY: " + mouseY; // Generic method for getting exact input
-                System.out.println(coordinates);
-                return coordinates;
-            }
-        }
-    }
-
     public void mousePressed() {
         if(boardImage != null) {
             finalMouseX = mouseX;
@@ -150,7 +136,6 @@ public class GUI extends PApplet implements IUI {
             int handBorderRightX = width-sizeOfText/2;
             int handBorderTopY = height - sizeOfText * 2 + (sizeOfText / 5);
             int handBorderBottomY = height - sizeOfText * 2 + (sizeOfText / 5 + sizeOfText);
-            System.out.println("X: " +mouseX+" Y: "+mouseY);
 
             if (finalMouseX > width / 2 && finalMouseY < width && finalMouseY > 0 && finalMouseY < width / 2) {
                 int boardIndexX = (int) map(finalMouseX, width / 2, width, 0, 15);
@@ -179,15 +164,6 @@ public class GUI extends PApplet implements IUI {
         textBox.text(inputText, width/4, height-60);
         textBox.endDraw();
         redraw();
-    }
-
-    private char getInputMainMenu() {
-        while (true) {
-            System.out.println("Waiting for input"); // TODO: Some line has to be here for some reason??
-            if(keyPressed){
-                return key;
-            }
-        }
     }
 
     @Override
@@ -258,48 +234,6 @@ public class GUI extends PApplet implements IUI {
 
     }
 
-    public String getMouseInputPostion() throws IllegalArgumentException{
-        int x = -1;
-        int y = -1;
-        if(clicked) {
-            x = (int)map(finalMouseX, width/2, width, 0, 15);
-            y = (int)map(finalMouseY, 0, width/2, 0, 15);
-            if (x < 0 || x > 14 || y < 0 || y > 14) {
-                throw new IllegalArgumentException();
-            }
-        }
-        return ""+x+","+y;
-    }
-    public String getInputMouseLetter() throws IllegalArgumentException{
-        int x = -1;
-        int y = -1;
-        String output = "";
-
-        if(clicked) {
-            x = (int)map(finalMouseX, width-(sizeOfText/2)-(sizeOfText*7), width-sizeOfText/2, 0, 7);
-            if (x < 0 || x > 7 || y < width/2 || y > sizeOfText) {
-                throw new IllegalArgumentException();
-            }
-        }
-        try {
-            try {
-                output = ""+playerLetters[x];
-            }
-            catch (NullPointerException e) {
-                output = "";
-            }
-        }
-        catch(ArrayIndexOutOfBoundsException e) {
-            getInputMouseLetter();
-        }
-        return output;
-    }
-
-    public void mouseClicked() {
-        finalMouseX = mouseX;
-        finalMouseY = mouseY;
-        clicked = true;
-    }
     @Override
     public void displayHand(String playerName,List<Letter> letters) {
         String playerString = "Current player:" + playerName;
@@ -322,9 +256,5 @@ public class GUI extends PApplet implements IUI {
         }
         handGraphic.endDraw();
         redraw();
-    }
-
-    public static boolean isAlphaNumeric(String s) {
-        return s != null && s.matches("^[a-zA-Z0-9]*$");
     }
 }

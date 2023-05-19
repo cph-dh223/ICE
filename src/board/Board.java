@@ -644,7 +644,13 @@ public class Board {
     }
 
 
-
+    /**
+     * Takes a position and a direction of a word and findes the fist letter in that word
+     * @param posX of the letter you want to find the fist letter in the word it is in
+     * @param posY of the letter you want to find the fist letter in the word it is in
+     * @param direction is the direction of the word you want to finde the fist letter in
+     * @return the X and Y values the firs letter in the word you are testin on
+     */
     public List<Integer> goToFirstLetter(int posX, int posY, Direction direction) {
 
         // posX and posY of the letter from where the method should go back
@@ -934,7 +940,6 @@ public class Board {
         return false;
     }
 
-
     public int countingPointsIfWordValid(boolean validWord, int letterPointsOfWord) {
 
         int totalPointsOfWord = letterPointsOfWord;
@@ -994,5 +999,13 @@ public class Board {
     public List<Tile> getToBePlaced() {
         return toBePlaced;
     }
+
+    public Tile[][] getTiles(){
+        return tiles;
+    }
+
+
+
+
 }
 
