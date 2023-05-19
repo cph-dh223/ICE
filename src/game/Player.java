@@ -23,10 +23,14 @@ public class Player {
 
     public void removeLetters(List<Letter> lettersToBeRemoved){
         
-      for (Letter letter : this.letters) {
-          for (Letter letterToBeRemoved : lettersToBeRemoved) {
-              if (letter.equals(letterToBeRemoved)) {
-                  letters.remove(letter);
+        for (int i = letters.size()-1; i >= 0; i--) {
+            Letter letter = letters.get(i);
+            if(lettersToBeRemoved.size() == 0) { return; }
+            for (int j = lettersToBeRemoved.size()-1; j >= 0 ; j--) {
+                Letter letterToBeRemoved = lettersToBeRemoved.get(j);
+                if (letter.equals(letterToBeRemoved)) {
+                    letters.remove(letter);
+                    lettersToBeRemoved.remove(letterToBeRemoved);
                 }
             }
         }

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import board.Board;
+import util.GUI;
 import util.IO;
 import util.IUI;
 import util.TextUI;
@@ -21,7 +22,8 @@ public class Game{
     private IUI ui;
 
     public Game() {
-        ui = new TextUI();
+        ui = GUI.getInstance();
+        // ui = new TextUI();
         letters = new ArrayList<Letter>();
         players = new ArrayList<Player>();
         dataSetup();
@@ -40,7 +42,7 @@ public class Game{
             ui.displayMessage("The dictionary file was not found please look in the data folder and make shure there is a \"Dictionary.txt\" file");
         }
         try {
-            lettersFromFile = IO.getDataFromTxt("./data/Letters.csv");
+            lettersFromFile = IO.getDataFromTxt("./data/LettersWOblank.csv");
         } catch (FileNotFoundException e) {
             ui.displayMessage("The file with letters and their ammount and score was not found please look in the data folder and make shure there is a \"Letters.csv\" file");
         }
@@ -58,23 +60,24 @@ public class Game{
     
     private void startGame(){
         String name1 = ui.getInput("player 1. name?");
-        ui.displayMessage("player one is "+ name1);
+        ui.displayMessage("player one is: "+ name1);
         String name2 = ui.getInput("player 2. name?");
-        ui.displayMessage("player two is "+ name2);
+        ui.displayMessage("player two is: "+ name2);
         Player player1 = new Player(name1);
         addRandomLettersToPlayer(7, player1);
         Player player2 = new Player(name2);
         addRandomLettersToPlayer(7, player2);
         players.add(player1);
         players.add(player2);
+
+        ui.displayBoard(board);
         gameLoop();
     }
 
     private void mainMenu(){
         while(true) {
-            ui.displayMessage("1) Play game");
-            ui.displayMessage("2) Load game");
-            ui.displayMessage("3) Quit game");
+
+            ui.displayMenu(new String[]{"1) Play game", "2) Load game", "3) Quit game"});
             String option = ui.getInput("Please type number to choose option");
             switch(option) {
                 case "1":
@@ -96,11 +99,10 @@ public class Game{
     private void gameLoop(){
         currentPlayer = players.get(0);
         while (true) {
+            ui.displayBoard(board);
             ui.displayMessage("Current player is: " + currentPlayer.getName());
-            ui.displayMessage("1) Place letter(s)");
-            ui.displayMessage("2) Extange letter(s)");
-            ui.displayMessage("3) End the game");
-            ui.displayMessage("4) Save game");
+            ui.displayMenu(new String[]{"1) Place letter(s)","2) Extange letter(s)","3) End the game","4) Save game"});
+            displayPlayerLetters(currentPlayer);
             String option = ui.getInput("Please type number to choose option");
             switch (option) {
                 case "1":
@@ -125,20 +127,23 @@ public class Game{
     
     
     private void placeLetters() {
-        displayPlayerLetters(currentPlayer);
-        ui.displayMessage("Choose where to plase what letter in this format: x,y,letter. Or press enter to signal you are done with your selection");
-        List<Letter> toBePlasedLetters = new ArrayList<Letter>();
+        ui.displayMessage("Choose where to place what letter in this format: x,y,letter. Or press enter to signal you are done with your selection");
+        List<Letter> toBePlacedLetters = new ArrayList<Letter>(1);
         while(true){
             String input = ui.getInput("Next letter or confirm selection");
             if (input.equals("")) {
-                int playerScore = board.checkWord();
+                int playerScore = board.checkSubmittedLetters();
                 if (playerScore == -1) {
-                    ui.displayMessage("you did not plase a valid word please try again");
+                    ui.displayMessage("you did not place a valid word please try again");
                     placeLetters();
                 }
-                currentPlayer.removeLetters(toBePlasedLetters);
+                else {
+                    board.updateBoard();
+                }
+                currentPlayer.removeLetters(toBePlacedLetters);
                 currentPlayer.addScore(playerScore);
-                addRandomLettersToPlayer(toBePlasedLetters.size(), currentPlayer);
+                System.out.println("Word points: " + playerScore);
+                addRandomLettersToPlayer(toBePlacedLetters.size(), currentPlayer);
                 displayPlayerLetters(currentPlayer);
                 return;
             }
@@ -155,7 +160,8 @@ public class Game{
         displayPlayerLetters(currentPlayer);
         String input = ui.getInput("Choose what letters to replace");
         List<Letter> lettersToReplace = new ArrayList<>();
-        for(char c : input.replaceAll("\\W*,*", "replacement").toCharArray()){
+        char[] charsToReplase = input.replaceAll(" *,*", "").toCharArray();
+        for(char c : charsToReplase){
             lettersToReplace.add(currentPlayer.getLetter(c));
         }
         currentPlayer.removeLetters(lettersToReplace);
@@ -164,13 +170,7 @@ public class Game{
     }
     
     private void displayPlayerLetters(Player player) {
-        String letters = "";
-        for (Letter letter : player.getLetters()) {
-            //letters += letter.toString() + ", ";
-            letters += letter.getLetter();
-        }
-        ui.displayMessage("This is your letters:");
-        ui.displayMessage(letters);
+        ui.displayHand(player.getName() ,player.getLetters());
     }
     
     private void endGame() {
