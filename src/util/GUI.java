@@ -16,7 +16,6 @@ public class GUI extends PApplet implements IUI {
     private PGraphics menuGraphic;
     private PGraphics msgGraphic;
     private PGraphics handGraphic;
-
     private PImage boardImage;
     private int finalMouseX;
     private int finalMouseY;
@@ -142,6 +141,34 @@ public class GUI extends PApplet implements IUI {
                 return coordinates;
             }
         }
+    }
+
+    public void mousePressed() {
+        if(boardImage != null) {
+            finalMouseX = mouseX;
+            finalMouseY = mouseY;
+            int handBorderLeftX = width/2 + (-(6 * sizeOfText) + handGraphic.width - (int)(sizeOfText * 1.5));
+            int handBorderRightX = 1900;
+            int handBorderTopY = height - sizeOfText * 2 + (sizeOfText / 5);
+            int handBorderBottomY = height - sizeOfText * 2 + (sizeOfText / 5 + sizeOfText);
+
+            if (finalMouseX > width / 2 && finalMouseY < width && finalMouseY > 0 && finalMouseY < width / 2) {
+                int boardIndexX = (int) map(finalMouseX, width / 2, width, 0, 15);
+                int BoardIndexY = (int) map(finalMouseY, 0, width / 2, 0, 15);
+                inputText = inputText.replaceAll("[^a-zA-Z]", "");
+                String tmpText = boardIndexX + "," + BoardIndexY + ",";
+                inputText = tmpText + inputText;
+            }
+            else if (finalMouseX > handBorderLeftX && finalMouseX < handBorderRightX && finalMouseY > handBorderTopY && finalMouseY < handBorderBottomY) {
+                int handIndex = (int) map(finalMouseX, handBorderLeftX, handBorderRightX, 7, 0);
+                inputText = inputText.replaceAll("[a-zA-Z]", "");
+                if (playerLetters.length > handIndex) {
+                   inputText += playerLetters[handIndex];
+                }
+            }
+            displayTextBox();
+        }
+
     }
 
     private void displayTextBox() {
