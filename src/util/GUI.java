@@ -150,7 +150,6 @@ public class GUI extends PApplet implements IUI {
             int handBorderRightX = width-sizeOfText/2;
             int handBorderTopY = height - sizeOfText * 2 + (sizeOfText / 5);
             int handBorderBottomY = height - sizeOfText * 2 + (sizeOfText / 5 + sizeOfText);
-            System.out.println("X: " +mouseX+" Y: "+mouseY);
 
             if (finalMouseX > width / 2 && finalMouseY < width && finalMouseY > 0 && finalMouseY < width / 2) {
                 int boardIndexX = (int) map(finalMouseX, width / 2, width, 0, 15);
