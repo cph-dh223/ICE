@@ -37,8 +37,8 @@ public class GUI extends PApplet implements IUI {
 
     public void settings(){
 
-        //fullScreen();
-        size(1920,1080);
+        fullScreen();
+        //size(1920,1080);
     }
 
     public void setup() {
@@ -148,9 +148,10 @@ public class GUI extends PApplet implements IUI {
             finalMouseX = mouseX;
             finalMouseY = mouseY;
             int handBorderLeftX = width/2 + (-(6 * sizeOfText) + handGraphic.width - (int)(sizeOfText * 1.5));
-            int handBorderRightX = 1900;
+            int handBorderRightX = width-sizeOfText/2;
             int handBorderTopY = height - sizeOfText * 2 + (sizeOfText / 5);
             int handBorderBottomY = height - sizeOfText * 2 + (sizeOfText / 5 + sizeOfText);
+            System.out.println("X: " +mouseX+" Y: "+mouseY);
 
             if (finalMouseX > width / 2 && finalMouseY < width && finalMouseY > 0 && finalMouseY < width / 2) {
                 int boardIndexX = (int) map(finalMouseX, width / 2, width, 0, 15);
