@@ -29,7 +29,7 @@ public class Game{
     public Game() {
         
         ui = new TextUI();
-        //ui = GUI.getInstance();
+        ui = GUI.getInstance();
         letters = new ArrayList<Letter>();
         players = new ArrayList<Player>();
         dataSetup();
